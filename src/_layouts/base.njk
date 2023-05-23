@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8"/>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+        <title>{{ title }} - bytemunch.dev</title>
+        <link rel="stylesheet" href="{{ '/assets/css/styles.css' | url }}">
+    </head>
+    <body>
+        <h1 class="title">
+            <a href="/">bytemunch<span class="title-secondary">dot</span>dev</a>
+            {%- if tags and ("post" in tags or "blog-page" in tags) -%}
+                <a href="/blog"><span class="title-secondary">slash</span>blog</a>
+            {%- endif -%}
+        </h1>
+        {{ content | safe }}
+    </body>
+</html>

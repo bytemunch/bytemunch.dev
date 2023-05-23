@@ -1,0 +1,11 @@
+---
+layout: base
+title: blog
+tags: [banana, blog-page, page]
+---
+
+<h1>bloglist</h1>
+{% for post in collections.post %}
+    {% import 'macros/post_card.njk' as post_card %}
+    {{ post_card.from(post) }}
+{% endfor %}

@@ -1,0 +1,85 @@
+:root {
+    color: #000000AA;
+    font-family: 'Courier New', Courier, monospace;
+}
+
+a {
+    color: #0000ffaa;
+    text-decoration: none;
+}
+
+p {
+    margin-top: 0;
+}
+
+h2 {
+    display: inline-block;
+    margin-top: 0.5em;
+    margin-bottom: 0em;
+}
+
+h2 {
+    clear: both;
+}
+
+a:visited {
+    color: #6600eeaa;
+}
+
+a:hover {
+    color: #000000ee;
+}
+
+h2 a,
+.title a,
+.title a:visited,
+.title {
+    color: #000000AA;
+}
+
+.title-secondary {
+    color: #00000066;
+}
+
+h2 a:hover,
+.title a:hover,
+#funding h2:hover {
+    color: #000000ee;
+}
+
+.title a:hover .title-secondary {
+    color: #00000099;
+}
+
+#funding.closed {
+    height: 1.6em;
+    overflow: hidden;
+    margin-bottom: 1em;
+}
+
+#funding h2 {
+    margin-top: 0;
+    cursor: pointer;
+}
+
+#recent-posts {
+    margin-bottom: 1em;
+}
+
+.post-card {
+    max-height: 6em;
+    overflow: hidden;
+    display: flex;
+    border: 3px double #00000066;
+    margin: 2px;
+}
+
+a:hover .post-card {
+    border-color: #000000ee;
+}
+
+.post-card .thumbnail img {
+    height: 5em;
+    width: 5em;
+    margin: 0.5em;
+}

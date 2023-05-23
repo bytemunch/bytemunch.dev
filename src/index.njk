@@ -1,0 +1,49 @@
+---
+title: home
+---
+
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8"/>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+        <title>{{ title }} - bytemunch.dev</title>
+        <link rel="stylesheet" href="/assets/css/styles.css">
+    </head>
+    <body>
+        <h1 class="title">
+            <a href="/">bytemunch<span class="title-secondary">dot</span>dev</a>
+        </h1>
+        <h2>about</h2>
+        <p>i'm sam. developer. minimalist. parent; naptime coder.</p>
+        <h2>projects</h2>
+        <p>magic project list here. cards with repo links . hover highlights border.</p>
+        <h2>
+            <a href='/blog'>blog</a>
+        </h2>
+        <p>
+            recent posts
+        </p>
+        <div id="recent-posts">
+        {% set arr = collections.post|sort(true,false,"data.timestamp") %}
+        {% for i in range(0,2) %}
+            {% import 'macros/post_card.njk' as post_card %}
+            {{ post_card.from(arr[i]) }}
+        {% endfor %}
+        </div>
+        <div id="funding" class="closed">
+            <h2 onclick=" let div = document.querySelector('#funding'); let h2 = document.querySelector('#funding h2'); if
+                    (div.classList.contains('closed')) { div.classList.remove('closed'); h2.textContent = 'funding ▲'; } else {
+                    div.classList.add('closed'); h2.textContent = 'funding ▼'; } ">
+                funding ▼</h2>
+            <p>i currently have a time budget of ~15hrs/week, and a cost budget of virtually nothing. my time budget will only be
+                getting smaller once my little one goes to nursery, as i'll be going back to work. if you would like to support my
+                projects, please
+                <a href="https://monzo.me/samueljamesedelsten">stick some cash in my pocket</a>. put your @ in the message so i know who
+                    to thank :) cheers</p>
+        </div>
+        <h2>links</h2>
+        <p>socials here</p>
+    </body>
+</html></body></html>
