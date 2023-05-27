@@ -1,11 +1,17 @@
 ---
 layout: base
 title: blog
-tags: [banana, blog-page, page]
+tags: [blog-page, page]
+pagination:
+    data: collections.post
+    size: 7
+    reverse: true
 ---
+{%include "partials/blog_paginate.njk"%}
 
-<h1>bloglist</h1>
-{% for post in collections.post %}
+{% for post in pagination.pages[pagination.pageNumber] %}
     {% import 'macros/post_card.njk' as post_card %}
     {{ post_card.from(post) }}
 {% endfor %}
+
+{%include "partials/blog_paginate.njk"%}

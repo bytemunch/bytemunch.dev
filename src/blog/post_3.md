@@ -1,6 +1,6 @@
 ---
-title: another-post-title
-timestamp: 1
+title: post-3
+timestamp: 2
 ---
 
 # another post title

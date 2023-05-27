@@ -8,12 +8,14 @@
         <link rel="stylesheet" href="{{ '/assets/css/styles.css' | url }}">
     </head>
     <body>
-        <h1 class="title">
-            <a href="/">bytemunch<span class="title-secondary">dot</span>dev</a>
-            {%- if tags and ("post" in tags or "blog-page" in tags) -%}
-                <a href="/blog"><span class="title-secondary">slash</span>blog</a>
-            {%- endif -%}
-        </h1>
-        {{ content | safe }}
+        <div id="main">
+            <h1 class="title">
+                <a href="/">bytemunch<span class="title-secondary">dot</span>dev</a>
+                {%- if tags and ("post" in tags or "blog-page" in tags) -%}
+                    <a href="/blog"><span class="title-secondary">slash</span>blog</a>
+                {%- endif -%}
+            </h1>
+            {{ content | safe }}
+        </div>
     </body>
 </html>

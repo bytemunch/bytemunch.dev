@@ -3,7 +3,7 @@ title: post title
 tags: [meta, apple, ]
 description: this, is a blog post
 thumbnail: non_default_thumb.png
-timestamp: a
+timestamp: 0
 ---
 
 # post title

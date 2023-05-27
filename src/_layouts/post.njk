@@ -3,7 +3,8 @@ layout: base
 tags: page
 ---
 
-<h2>BLOG POST</h2>
-
-{{content | safe}}
-
+{% include "partials/post_paginate.njk" %}
+<div id="post">
+    {{ content | safe }}
+</div>
+{% include "partials/post_paginate.njk" %}
