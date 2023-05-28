@@ -1,8 +1,5 @@
 ---
 title: project 2
-
+link: example.com
+repo: example.com
 ---
-
-# project 2 readme file
-
-for example
