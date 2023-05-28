@@ -1,0 +1,9 @@
+{
+    "title": "project title",
+    "layout": "base",
+    "tags": "projects",
+    "description": "this is a project description",
+    "thumbnail": "default_thumb.png",
+    "link": "https://example.bytemunch.dev",
+    "repo": "https://github.com/bytemunch/example"
+}

@@ -1,6 +1,6 @@
 {% macro from(post) %}
-    <a href="{{ post.url }}">
-        <div class="post-card">
+    <div class="post-card">
+        <a href="{{ post.url }}">
             <div class="thumbnail">
                 <img src="/blog/img/{{ post.data.thumbnail }}" alt="post thumbnail"/>
             </div>
@@ -8,6 +8,6 @@
                 <h2>{{ post.data.title }}</h2>
                 <p>{{ post.data.description }}</p>
             </div>
-        </div>
-    </a>
+        </a>
+    </div>
 {% endmacro %}

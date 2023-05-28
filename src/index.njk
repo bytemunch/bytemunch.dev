@@ -5,19 +5,30 @@ layout: base
 
 <h2>about</h2>
 <p>i'm sam. developer. minimalist. parent; naptime coder.</p>
-<h2>projects</h2>
-<p>magic project list here. cards with repo links . hover highlights border.</p>
+<a href="projects">
+    <h2>projects</h2>
+</a>
+<p>recent projects</p>
+<div id="projects">
+    {% set arr = collections.projects|sort(true,false,"timestamp") %}
+    {% for i in range(0,3) %}
+        {% if arr[i] %}
+            {% import 'macros/project_card.njk' as project_card %}
+            {{ project_card.from(arr[i]) }}
+        {% endif %}
+    {% endfor %}
+</div>
 <h2>
     <a href='/blog'>blog</a>
 </h2>
-<p>
-    recent posts
-</p>
+<p>recent posts</p>
 <div id="recent-posts">
     {% set arr = collections.post|sort(true,false,"data.timestamp") %}
     {% for i in range(0,2) %}
-        {% import 'macros/post_card.njk' as post_card %}
-        {{ post_card.from(arr[i]) }}
+        {% if arr[i] %}
+            {% import 'macros/post_card.njk' as post_card %}
+            {{ post_card.from(arr[i]) }}
+        {% endif %}
     {% endfor %}
 </div>
 <div id="funding" class="closed">
@@ -29,7 +40,7 @@ layout: base
         getting smaller once my little one goes to nursery, as i'll be going back to work. if you would like to support my
         projects, please
         <a href="https://monzo.me/samueljamesedelsten">stick some cash in my pocket</a>. put your @ in the message so i know who
-                                to thank :) cheers</p>
+            to thank :) cheers</p>
 </div>
 <h2>links</h2>
 <p>socials here</p>

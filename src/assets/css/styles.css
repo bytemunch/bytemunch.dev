@@ -89,24 +89,65 @@ h2 a:hover,
 
 #recent-posts {
     margin-bottom: 1em;
+    display: flex;
+    flex-direction: column;
+    align-content: center;
+    flex-wrap: wrap;
+}
+
+.post-card,
+.project-card {
+    border: 3px double #00000066;
+    margin: 3px;
+    overflow: hidden;
+    display: flex;
+    background: white;
+    flex-direction: column;
+}
+
+.post-card:hover,
+.project-card:hover {
+    transform: scale(1.05);
+    border-color: #000000AA;
+}
+
+.post-card a {
+    display: flex;
+}
+
+#projects {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.project-card {
+    max-height: 16em;
+    justify-content: center;
+    flex-wrap: wrap;
+    text-align: center;
+    width: 200px;
 }
 
 .post-card {
     max-height: 6em;
-    overflow: hidden;
-    display: flex;
-    border: 3px double #00000066;
-    margin: 2px;
+    width: 95%;
 }
 
-a:hover .post-card {
-    border-color: #000000ee;
-}
-
-.post-card .thumbnail img {
+.post-card a .thumbnail img {
     height: 5em;
     width: 5em;
     margin: 0.5em;
+}
+
+.project-card a .thumbnail {
+    display: flex;
+    justify-content: center;
+}
+
+.project-card .thumbnail img {
+    height: 7em;
+    width: 7em;
 }
 
 #post img,
