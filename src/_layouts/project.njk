@@ -4,11 +4,15 @@ title: project
 tags: [projects]
 ---
 
-<h1>{{ title }}</h1>
-<p>{{ description }}</p>
+<div class="project-header">
+    <h1>{{ title }}</h1>
+    <p>{{ description }}</p>
+    <img src="./img/thumb.png" alt="{{ title }} thumbnail" class="thumb"/>
+</div>
 {{ content|safe }}
 {% if link %}
-    <a href="{{ link }}">check it out</a> {%if repo%}|{%endif%}
+    <a href="{{ link }}">check it out</a>
+    {% if repo %}|{% endif %}
 {% endif %}
 {% if repo %}
     <a href="{{ repo }}">repo</a>

@@ -3,5 +3,6 @@
     "layout": "project",
     "tags": "projects",
     "description": "this is a project description",
-    "thumbnail": "default_thumb.png"
+    "thumbnail": "default_thumb.png",
+    "timestamp": 0
 }

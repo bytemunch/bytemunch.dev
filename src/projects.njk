@@ -5,7 +5,7 @@ tags: [projects-page, page]
 ---
 
 <div id="projects">
-    {% set arr = collections.projects|sort(true,false,"timestamp") %}
+    {% set arr = collections.projects|sort(true,false,"data.timestamp") %}
     {% for proj in arr %}
         {% import 'macros/project_card.njk' as project_card %}
         {{ project_card.from(proj) }}

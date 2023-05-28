@@ -10,6 +10,7 @@
 body {
     margin: 0;
     scrollbar-width: 0px;
+    overflow-x: hidden;
 }
 
 body::-webkit-scrollbar {
@@ -23,6 +24,7 @@ body::-webkit-scrollbar {
     margin: auto;
     border-left: 1px dashed black;
     border-right: 1px dashed black;
+    overflow-x: hidden;
 }
 
 img {
@@ -73,6 +75,10 @@ h2 a,
     color: #00000066;
 }
 
+.title-location {
+    margin-left: -0.6em;
+}
+
 h2 a:hover,
 .title a:hover,
 #funding h2:hover {
@@ -113,7 +119,6 @@ h2 a:hover,
     overflow: hidden;
     display: flex;
     background: white;
-    flex-direction: column;
 }
 
 .post-card:hover,
@@ -133,11 +138,35 @@ h2 a:hover,
 }
 
 .project-card {
-    max-height: 16em;
+    height: 16em;
     justify-content: center;
     flex-wrap: wrap;
     text-align: center;
-    width: 200px;
+    width: 260px;
+}
+
+.project-card .info {
+    border-bottom: 1px dashed black;
+    height: 128px;
+}
+
+.project-card .info p {
+    margin: 0;
+}
+
+.project-card .links {
+    height: 22px;
+}
+
+.project-card a .thumbnail {
+    display: flex;
+    justify-content: center;
+    height: 96px;
+}
+
+.project-card .thumbnail img {
+    height: 96px;
+    width: 96px;
 }
 
 .post-card {
@@ -151,15 +180,10 @@ h2 a:hover,
     margin: 0.5em;
 }
 
-.project-card a .thumbnail {
-    display: flex;
-    justify-content: center;
+#post {
+    border-bottom: 1px dashed black;
 }
 
-.project-card .thumbnail img {
-    height: 7em;
-    width: 7em;
-}
 
 #post img,
 #post * img,
@@ -192,13 +216,47 @@ ol {
     list-style: none;
     display: flex;
     justify-content: space-evenly;
+    padding: 0;
 }
 
 .post-paginate {
     justify-content: space-between;
-    padding:0;
+    padding: 0;
+    padding-bottom: 16px;
+    border-bottom: 1px dashed black;
 }
 
 li {
     display: inline;
+}
+
+/* project */
+
+.project-header {
+    display: grid;
+    width: 100%;
+    justify-content: space-between;
+    padding-bottom: 16px;
+    border-bottom: 1px dashed black;
+}
+
+.project-header h1 {
+    grid-row-start: 1;
+    grid-row-end: 2;
+    grid-column-start: 1;
+    grid-column-end: 2;
+}
+
+.project-header p {
+    grid-row-start: 2;
+    grid-row-end: 3;
+    grid-column-start: 1;
+    grid-column-end: 2;
+}
+
+.project-header img {
+    grid-row-start: 1;
+    grid-row-end: 3;
+    grid-column-start: 2;
+    grid-column-end: 3;
 }
