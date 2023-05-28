@@ -7,12 +7,16 @@
         </li>
         <li>
             {% if pagination.href.previous %}
-                <a href="{{ pagination.href.previous }}">Previous</a>
+                <a href="{{ pagination.href.previous }}">Prev</a>
                 {% else %}Prev{% endif %}
         </li>
         {%- for pageEntry in pagination.pages %}
             <li>
-                <a href="{{ pagination.hrefs[ loop.index0 ] }}" {% if page.url == pagination.hrefs[ loop.index0 ] %} aria-current="page" {% endif %}>{{ loop.index }}</a>
+                {% if page.url == pagination.hrefs[ loop.index0 ] %}
+                {{ loop.index }}
+                {% else %}
+                <a href="{{ pagination.hrefs[ loop.index0 ] }}"  aria-current="page" >{{ loop.index }}</a>
+                {% endif %}
             </li>
         {%- endfor %}
         <li>
