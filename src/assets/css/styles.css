@@ -21,7 +21,8 @@ body::-webkit-scrollbar {
     min-height: 100vh;
     padding: 5px;
     margin: auto;
-    border: 1px dashed black;
+    border-left: 1px dashed black;
+    border-right: 1px dashed black;
 }
 
 img {
@@ -53,6 +54,12 @@ a:visited {
 
 a:hover {
     color: #000000ee;
+}
+
+.title {
+    border-bottom: 1px dashed black;
+    padding-bottom: 0.5em;
+    margin-bottom: 0.5em;
 }
 
 h2 a,
