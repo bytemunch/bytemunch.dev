@@ -76,6 +76,10 @@ h2 a:hover,
     color: #00000099;
 }
 
+#funding {
+    margin-top: 1em;
+}
+
 #funding.closed {
     height: 1.6em;
     overflow: hidden;
@@ -85,10 +89,10 @@ h2 a:hover,
 #funding h2 {
     margin-top: 0;
     cursor: pointer;
+    color: #0000ffaa;
 }
 
 #recent-posts {
-    margin-bottom: 1em;
     display: flex;
     flex-direction: column;
     align-content: center;
@@ -167,6 +171,12 @@ blockquote {
 
 .links {
     user-select: none;
+}
+
+.see-more {
+    display: block;
+    padding-left: 2em;
+    padding-top: 0.5em;
 }
 
 /* pagination */

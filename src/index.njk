@@ -18,9 +18,11 @@ layout: base
         {% endif %}
     {% endfor %}
 </div>
-<h2>
-    <a href='/blog'>blog</a>
-</h2>
+<a href="projects" class="see-more">see more...</a>
+
+<a href='blog'>
+    <h2>blog</h2>
+</a>
 <p>recent posts</p>
 <div id="recent-posts">
     {% set arr = collections.post|sort(true,false,"data.timestamp") %}
@@ -31,6 +33,8 @@ layout: base
         {% endif %}
     {% endfor %}
 </div>
+<a href="blog" class="see-more">see more...</a>
+
 <div id="funding" class="closed">
     <h2 onclick=" let div = document.querySelector('#funding'); let h2 = document.querySelector('#funding h2'); if
             (div.classList.contains('closed')) { div.classList.remove('closed'); h2.textContent = 'funding ▲'; } else {
