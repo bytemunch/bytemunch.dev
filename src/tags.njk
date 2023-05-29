@@ -8,6 +8,8 @@ layout: base
 tags: [blog-page]
 ---
 
+{%include "partials/blog_search.njk"%}
+
 <h2>posts tagged “{{ tag }}”</h2>
 {% set taglist = collections[ tag ] %}
 {% for post in taglist | reverse %}

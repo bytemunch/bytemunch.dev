@@ -7,11 +7,11 @@ pagination:
     size: 7
     reverse: true
 ---
-{%include "partials/blog_paginate.njk"%}
 
+{% include "partials/blog_search.njk" %}
+{% include "partials/blog_paginate.njk" %}
 {% for post in pagination.pages[pagination.pageNumber] %}
     {% import 'macros/post_card.njk' as post_card %}
     {{ post_card.from(post) }}
 {% endfor %}
-
-{%include "partials/blog_paginate.njk"%}
+{% include "partials/blog_paginate.njk" %}
