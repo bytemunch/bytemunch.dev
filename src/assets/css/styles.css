@@ -105,13 +105,6 @@ h2 a:hover,
     color: #0000ffaa;
 }
 
-#recent-posts {
-    display: flex;
-    flex-direction: column;
-    align-content: center;
-    flex-wrap: wrap;
-}
-
 .post-link,
 .project-card {
     border: 3px double #00000066;
@@ -166,8 +159,7 @@ h2 a:hover,
 }
 
 .post-link {
-    width: 95%;
-    margin: 5px;
+    margin: 5px 2.5%;
     max-height: 6em;
     position: relative;
 }
@@ -180,8 +172,9 @@ h2 a:hover,
 
 .post-link .date {
     position: absolute;
-    top: 0.5em;
-    right: 0.5em;
+    top: 0em;
+    right: 0.2em;
+    font-size: 1em;
 }
 
 .links.project-page {
@@ -281,4 +274,28 @@ li {
     grid-row-end: 3;
     grid-column-start: 2;
     grid-column-end: 3;
+}
+
+/* search */
+#blog-search {
+    display: flex;
+    justify-content: space-between;
+    padding: 0 5%;
+}
+
+#blog-search-form {
+    display: flex;
+}
+
+/* tag list */
+.tag-list {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    padding: 0;
+}
+.tag-list li {
+    display: block;
+    margin: auto 10px;
+    font-size: 1.2em;
 }

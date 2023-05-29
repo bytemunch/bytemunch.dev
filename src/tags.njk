@@ -3,9 +3,11 @@ pagination:
   data: collections
   size: 1
   alias: tag
-permalink: /blog/tags/{{ tag }}/
+permalink: /blog/tags/{{ tag | slugify }}/
 layout: base
 tags: [blog-page]
+eleventyComputed:
+  title: "tag: {{ tag }}"
 ---
 
 {%include "partials/blog_search.njk"%}

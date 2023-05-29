@@ -1,7 +1,10 @@
-<form
-    id="blog-search"
-    onsubmit="window.location.href=`/blog/tags/${document.querySelector('#blog-search-input').value}`;"
-    action="javascript:void(0)">
-    <input type="text" id="blog-search-input" placeholder="tag search..."/>
-    <input type="submit" value="Go"/>
-</form>
+<div id="blog-search">
+    <a href="/blog/tags/">view all tags</a>
+    <form
+        id="blog-search-form"
+        onsubmit="window.location.href=`/blog/tags/${document.querySelector('#blog-search-input').value}`;"
+        action="javascript:void(0)">
+        <input type="text" id="blog-search-input" placeholder="tag search..."/>
+        <input type="submit" value="Go"/>
+    </form>
+</div>

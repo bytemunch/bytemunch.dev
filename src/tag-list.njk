@@ -1,0 +1,19 @@
+---
+layout: base
+tags: [blog-page]
+permalink: /blog/tags/
+title: tags
+---
+
+<a href="/blog">recent posts</a>
+<br/>
+<h2>all tags</h2>
+<ul class="tag-list">
+    {% for tag in collections.all | getAllTags | filterTagList %}
+        {% set tagUrl %}/blog/tags/{{ tag | slugify }}/{% endset %}
+        <li>
+            <a href="{{ tagUrl }}" class="post-tag">{{ tag }}</a>
+            ({{ tag | getTagCount(collections.all) }})
+        </li>
+    {% endfor %}
+</ul>
