@@ -4,6 +4,11 @@ tags: page
 ---
 
 {% include "partials/post_paginate.njk" %}
+<div id="post-header">
+    <h1>{{ title }}</h1>
+    <p>{{ description }}</p>
+    <p class="date">{{ date | readableDate }}</p>
+</div>
 <div id="post">
     {{ content | safe }}
 </div>

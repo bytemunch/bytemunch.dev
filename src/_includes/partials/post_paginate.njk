@@ -1,5 +1,5 @@
-{% set previousPost = collections.post|sort(false,false,"data.timestamp") | getPreviousCollectionItem(page) %}
-{% set nextPost = collections.post|sort(false,false,"data.timestamp") | getNextCollectionItem(page) %}
+{% set previousPost = collections.post | getPreviousCollectionItem(page) %}
+{% set nextPost = collections.post | getNextCollectionItem(page) %}
 <nav>
     <ol class='post-paginate'>
         <li>

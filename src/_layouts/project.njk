@@ -5,15 +5,23 @@ tags: [projects]
 ---
 
 <div class="project-header">
+    {%if link %}<a href="{{link}}">{%endif%}
     <h1>{{ title }}</h1>
+    {%if link %}</a>{%endif%}
     <p>{{ description }}</p>
     <img src="./img/thumb.png" alt="{{ title }} thumbnail" class="thumb"/>
 </div>
 {{ content|safe }}
-{% if link %}
-    <a href="{{ link }}">check it out</a>
-    {% if repo %}|{% endif %}
-{% endif %}
-{% if repo %}
-    <a href="{{ repo }}">repo</a>
-{% endif %}
+<div class="links project-page">
+    {% if link %}
+        <a href="{{ link }}">view</a>
+        {% if repo %}|{% endif %}
+    {% endif %}
+    {% if repo %}
+        <a href="{{ repo }}">repo</a>
+    {% endif %}
+    {% if blog %}
+        {% if repo or link %}|{% endif %}
+        <a href="/blog/tags/{{ blog }}">devlog</a>
+    {% endif %}
+</div>

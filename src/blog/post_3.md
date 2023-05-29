@@ -1,6 +1,7 @@
 ---
 title: post-3
-timestamp: 2
+date: 1999-01-02
+tags: [shyte]
 ---
 
 # another post title

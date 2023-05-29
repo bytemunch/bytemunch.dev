@@ -112,7 +112,7 @@ h2 a:hover,
     flex-wrap: wrap;
 }
 
-.post-card,
+.post-link,
 .project-card {
     border: 3px double #00000066;
     margin: 3px;
@@ -121,14 +121,10 @@ h2 a:hover,
     background: white;
 }
 
-.post-card:hover,
+.post-link:hover,
 .project-card:hover {
     transform: scale(1.05);
     border-color: #000000AA;
-}
-
-.post-card a {
-    display: flex;
 }
 
 #projects {
@@ -169,21 +165,47 @@ h2 a:hover,
     width: 96px;
 }
 
-.post-card {
-    max-height: 6em;
+.post-link {
     width: 95%;
+    margin: 5px;
+    max-height: 6em;
+    position: relative;
 }
 
-.post-card a .thumbnail img {
+.post-link .thumbnail img {
     height: 5em;
     width: 5em;
     margin: 0.5em;
 }
 
+.post-link .date {
+    position: absolute;
+    top: 0.5em;
+    right: 0.5em;
+}
+
+.links.project-page {
+    text-align: center;
+    border-top: 1px dashed black;
+    border-bottom: 1px dashed black;
+    padding-top: 8px;
+    padding-bottom: 8px;
+}
+
+#post-header {
+    border-bottom: 1px dashed black;
+    position: relative;
+}
+
+#post-header .date {
+    position: absolute;
+    top: 0.5em;
+    right: 0.5em;
+}
+
 #post {
     border-bottom: 1px dashed black;
 }
-
 
 #post img,
 #post * img,

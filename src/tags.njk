@@ -1,0 +1,16 @@
+---
+pagination:
+  data: collections
+  size: 1
+  alias: tag
+permalink: /blog/tags/{{ tag }}/
+layout: base
+tags: [blog-page]
+---
+
+<h2>posts tagged “{{ tag }}”</h2>
+{% set taglist = collections[ tag ] %}
+{% for post in taglist | reverse %}
+    {% import 'macros/post_card.njk' as post_card %}
+    {{ post_card.from(post) }}
+{% endfor %}

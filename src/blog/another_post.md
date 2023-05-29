@@ -1,6 +1,6 @@
 ---
 title: another-post-title
-timestamp: 1
+date: 1999-01-01
 ---
 
 # another post title
