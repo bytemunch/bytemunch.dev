@@ -188,7 +188,6 @@ h2 a:hover,
 
 .project-card .thumbnail img {
     height: 96px;
-    width: 96px;
 }
 
 .post-link {
@@ -198,7 +197,6 @@ h2 a:hover,
 }
 
 .post-link .thumbnail img {
-    height: 5em;
     width: 5em;
     margin: 0.25em 1em 0.25em 0.25em;
 }

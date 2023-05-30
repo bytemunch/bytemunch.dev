@@ -4,7 +4,6 @@ date: 2022-02-28
 link: https://bytemunch.itch.io/shyte-platformer
 repo: https://github.com/bytemunch/shyte-platformer
 description: a platformer, written in rust using bevy. rather unserious.
-blog: shyte
 ---
 
 ## what's this?
