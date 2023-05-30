@@ -3,7 +3,32 @@
 }
 
 :root {
-    color: #000000AA;
+    --background-color: #ffffff;
+    --text-color: #000000aa;
+    --text-color-light: #00000066;
+    --text-color-dark: #000000ee;
+    --link-color: #0000ffaa;
+    --link-color-visited: #6600eeaa;
+    --border-color: #000000aa;
+    --border-color-dark: #000000ee;
+    --border-color-light: #00000066;
+}
+
+:root[data-theme='dark'] {
+    --background-color: #212121;
+    --text-color: #ffffffaa;
+    --text-color-light: #ffffff66;
+    --text-color-dark: #ffffffee;
+    --link-color: #8888ffaa;
+    --link-color-visited: #cc99ffaa;
+    --border-color: #ffffffaa;
+    --border-color-dark: #ffffffee;
+    --border-color-light: #ffffff66;
+}
+
+html {
+    color: var(--text-color);
+    background-color: var(--background-color);
     font-family: 'Courier New', Courier, monospace;
 }
 
@@ -22,8 +47,8 @@ body::-webkit-scrollbar {
     min-height: 100vh;
     padding: 5px;
     margin: auto;
-    border-left: 1px dashed black;
-    border-right: 1px dashed black;
+    border-left: 1px dashed var(--border-color-dark);
+    border-right: 1px dashed var(--border-color-dark);
     overflow-x: hidden;
 }
 
@@ -32,7 +57,7 @@ img {
 }
 
 a {
-    color: #0000ffaa;
+    color: var(--link-color);
     text-decoration: none;
 }
 
@@ -51,15 +76,15 @@ h2 {
 }
 
 a:visited {
-    color: #6600eeaa;
+    color: var(--link-color-visited);
 }
 
 a:hover {
-    color: #000000ee;
+    color: var(--text-color-dark);
 }
 
 .title {
-    border-bottom: 1px dashed black;
+    border-bottom: 1px dashed var(--border-color-dark);
     padding-bottom: 0.5em;
     margin-bottom: 0.5em;
 }
@@ -68,11 +93,11 @@ h2 a,
 .title a,
 .title a:visited,
 .title {
-    color: #000000AA;
+    color: var(--text-color);
 }
 
 .title-secondary {
-    color: #00000066;
+    color: var(--text-color-light);
 }
 
 .title-location {
@@ -82,11 +107,11 @@ h2 a,
 h2 a:hover,
 .title a:hover,
 #funding h2:hover {
-    color: #000000ee;
+    color: var(--text-color-dark);
 }
 
 .title a:hover .title-secondary {
-    color: #00000099;
+    color: var(--text-color);
 }
 
 #funding {
@@ -102,22 +127,22 @@ h2 a:hover,
 #funding h2 {
     margin-top: 0;
     cursor: pointer;
-    color: #0000ffaa;
+    color: var(--link-color);
 }
 
 .post-link,
 .project-card {
-    border: 3px double #00000066;
+    border: 3px double var(--border-color-light);
     margin: 3px;
     overflow: hidden;
     display: flex;
-    background: white;
+    background: var(--background-color);
 }
 
 .post-link:hover,
 .project-card:hover {
     transform: scale(1.05);
-    border-color: #000000AA;
+    border-color: var(--border-color);
 }
 
 #projects {
@@ -135,7 +160,7 @@ h2 a:hover,
 }
 
 .project-card .info {
-    border-bottom: 1px dashed black;
+    border-bottom: 1px dashed var(--border-color-dark);
     height: 128px;
 }
 
@@ -167,7 +192,7 @@ h2 a:hover,
 .post-link .thumbnail img {
     height: 5em;
     width: 5em;
-    margin: 0.5em;
+    margin: 0.25em 1em 0.25em 0.25em;
 }
 
 .post-link .date {
@@ -179,14 +204,14 @@ h2 a:hover,
 
 .links.project-page {
     text-align: center;
-    border-top: 1px dashed black;
-    border-bottom: 1px dashed black;
+    border-top: 1px dashed var(--border-color-dark);
+    border-bottom: 1px dashed var(--border-color-dark);
     padding-top: 8px;
     padding-bottom: 8px;
 }
 
 #post-header {
-    border-bottom: 1px dashed black;
+    border-bottom: 1px dashed var(--border-color-dark);
     position: relative;
 }
 
@@ -197,7 +222,7 @@ h2 a:hover,
 }
 
 #post {
-    border-bottom: 1px dashed black;
+    border-bottom: 1px dashed var(--border-color-dark);
 }
 
 #post img,
@@ -238,7 +263,7 @@ ol {
     justify-content: space-between;
     padding: 0;
     padding-bottom: 16px;
-    border-bottom: 1px dashed black;
+    border-bottom: 1px dashed var(--border-color-dark);
 }
 
 li {
@@ -252,7 +277,7 @@ li {
     width: 100%;
     justify-content: space-between;
     padding-bottom: 16px;
-    border-bottom: 1px dashed black;
+    border-bottom: 1px dashed var(--border-color-dark);
 }
 
 .project-header h1 {
@@ -294,6 +319,7 @@ li {
     justify-content: center;
     padding: 0;
 }
+
 .tag-list li {
     display: block;
     margin: auto 10px;
