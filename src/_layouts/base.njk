@@ -1,5 +1,8 @@
 <!DOCTYPE html>
-<html lang="en" data-theme="dark">
+<html lang="en" data-theme="light">
+    <script>
+        document.querySelector("html").setAttribute("data-theme", localStorage.getItem("theme") || "light");
+    </script>
     <head>
         <meta charset="UTF-8"/>
         <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
@@ -9,17 +12,32 @@
     </head>
     <body>
         <div id="main">
-            <h1 class="title">
-                <a href="/">bytemunch<span class="title-secondary">dot</span>dev</a>
-                {%- if tags and ("post" in tags or "blog-page" in tags) -%}
-                    <a href="/blog" class="title-location">
-                        <span class="title-secondary">slash</span>blog</a>
-                {%- endif -%}
-                {%- if tags and ("projects" in tags or "projects-page" in tags) -%}
-                    <a href="/projects" class="title-location">
-                        <span class="title-secondary">slash</span>projects</a>
-                {%- endif -%}
-            </h1>
+            <div class="title">
+                <h1>
+                    <a href="/">bytemunch<span class="title-secondary">dot</span>dev</a>
+                    {%- if tags and ("post" in tags or "blog-page" in tags) -%}
+                        <a href="/blog" class="title-location">
+                            <span class="title-secondary">slash</span>blog</a>
+                    {%- endif -%}
+                    {%- if tags and ("projects" in tags or "projects-page" in tags) -%}
+                        <a href="/projects" class="title-location">
+                            <span class="title-secondary">slash</span>projects</a>
+                    {%- endif -%}
+                </h1>
+                <a
+                    id="theme-switch"
+                    href="javascript:void(0)"
+                    onclick=" let theme = localStorage.getItem('theme') || 'light'; document.querySelector('#theme-switch').textContent =
+                        theme; theme = theme == 'light' ? 'dark' : 'light'; localStorage.setItem('theme',theme);
+                        document.querySelector('html').setAttribute('data-theme',theme); ">
+                    theme toggle</a>
+                <script>
+                    let theme = localStorage.getItem('theme') || 'light';
+                    document.querySelector('#theme-switch').textContent = theme == 'light'
+                        ? 'dark'
+                        : 'light';
+                </script>
+            </div>
             {{ content | safe }}
         </div>
     </body>
