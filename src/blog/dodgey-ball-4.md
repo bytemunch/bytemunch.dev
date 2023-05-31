@@ -3,7 +3,7 @@ title: dodgey ball devlog 4
 tags: [dev, game, dodgeball, dodgey-ball, javascript, typescript, web, input]
 date: 2021-10-26
 description: game needs controls
-thumbnail: dodgey-ball-logo.png
+thumbnail: dodgey-ball/dodgey-ball-logo.png
 ---
 
 ## Control Methods
@@ -30,21 +30,21 @@ This will be an interesting one. It seems like a common enough input method that
 
 Yup, here's a cool [fiddle](https://jsfiddle.net/aa0et7tr/5/) from [/u/AndrewGreenh](https://www.reddit.com/user/AndrewGreenh) that I can co-opt into the game.
 
-![touch controls](/blog/img/touchscreen-controls.gif)
+![touch controls](/blog/dodgey-ball/img/touchscreen-controls.gif)
 
 That's working nicely, but I have a sneaking suspicion that multitouch is gonna bust this implementation up. I'll load it up on the phone and find out.
 
-![touch controls, no multitouch](/blog/img/touchscreen-no-multi.gif)
+![touch controls, no multitouch](/blog/dodgey-ball/img/touchscreen-no-multi.gif)
 
 Oof, yup. Plenty to fix up here. We need to somehow prevent pinch-zoom, and filter the touch events to make sure they're for the respective joystick.
 
 Usability-wise I think that on mobile the ball should shoot in the aimed direction on release of the stick, as button pressing on a touchscreen is a terrible experience whichever way you slice it.
 
-![sticky sticks](/blog/img/sticky-sticks.gif)
+![sticky sticks](/blog/dodgey-ball/img/sticky-sticks.gif)
 
 Attempt 1 lead to sticky sticks.
 
-![unsticky sticks](/blog/img/unsticky-sticks.gif)
+![unsticky sticks](/blog/dodgey-ball/img/unsticky-sticks.gif)
 
 But expanding the zone I was doing the collision check in fixed it! Now to take a look at the zoom issue.
 

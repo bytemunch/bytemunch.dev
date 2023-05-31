@@ -3,7 +3,7 @@ title: dodgey ball devlog 0
 tags: [dev, game, dodgeball, dodgey-ball, javascript, typescript, web]
 date: 2021-10-20
 description: So here I am. Starting a devlog partway through a project.
-thumbnail: dodgey-ball-logo.png
+thumbnail: dodgey-ball/dodgey-ball-logo.png
 ---
 
 ## The Project
@@ -36,15 +36,15 @@ Target reticle, throw ball button, pickup ball button, sprint button, all easy e
 
 And now add some collision and...
 
-![awful collision](/blog/img/yeet-collision.gif)
+![awful collision](/blog/dodgey-ball/img/yeet-collision.gif)
 
 and...
 
-![sticky collision](/blog/img/sticky-collision.gif)
+![sticky collision](/blog/dodgey-ball/img/sticky-collision.gif)
 
 AND...
 
-![ok collision](/blog/img/ok-collision.gif)
+![ok collision](/blog/dodgey-ball/img/ok-collision.gif)
 
 Ok. We can work with that.
 

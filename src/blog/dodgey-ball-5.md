@@ -3,7 +3,7 @@ title: dodgey ball devlog 5
 tags: [dev, game, dodgeball, dodgey-ball, javascript, typescript, web, input, multiplayer]
 date: 2021-11-22
 description: multiplayer preperation
-thumbnail: dodgey-ball-logo.png
+thumbnail: dodgey-ball/dodgey-ball-logo.png
 ---
 
 ## Controller Selection
@@ -13,21 +13,21 @@ So if you've been reading along you may have noticed I've implemented full-scree
 
 To get the behaviour I want I'll again be making use of a custom element.
 
-![controller selection screen](/blog/img/control-select.gif)
+![controller selection screen](/blog/dodgey-ball/img/control-select.gif)
 
 Yup, that's what I'm looking for! Now to let the player objects pull from these elements' states, and that's controller selection functioning. Though in practise one player selecting all the control schemes is a bit clunky. I'm thinking that setting touch or keyboard controls should be done manually, while controllers auto-assign to their players and then go to team/character selection after. Or maybe make team/character/controller selection one screen? Market research time! What's everyone else doing?
 
-![image of notes 1](/blog/img/notes-research.jpg)
+![image of notes 1](/blog/dodgey-ball/img/notes-research.jpg)
 
 After looking at a few other games' controller setup screens, I have a better idea of what I want mine to be. Controllers should populate the next available player slot when the primary face button is pressed and free it up with the secondary face button. The same screen and element will be used to select a profile or character when it's populated, and all controllers but player 1's will be locked into their elements. I'll add a new screen after controller setup for team setup, à la FIFA, as keeping the two seperated will be better for adding online play later, where all players will be locked to one team. Team setup will also be where desicions about AI players will be made. Keyboard and touch controls will be selectable by clicking or tapping the join elements, and players should be colour coded.
 
 Well that's a lot of words. Time for some actual coding to get it all up and running!
 
-![controller joining and player character selection](/blog/img/controller-setup-4player.gif)
+![controller joining and player character selection](/blog/dodgey-ball/img/controller-setup-4player.gif)
 
 Needs some touchup work on the CSS side and some button prompts, but this screen's looking good functionally. I'll need to make (or pinch) a manifest of friendlier controller names to limit the space required to display controller types too, as names like `Wireless Controller (STANDARD GAMEPAD Vendor: 054c Product: 05c4)` and `Xbox 360 Controller (XInput STANDARD GAMEPAD)` aren't the nicest to look at.
 
-![friendly controller names](/blog/img/controllers-friendly.png)
+![friendly controller names](/blog/dodgey-ball/img/controllers-friendly.png)
 
 Fab. I'm glad to be moving on from that screen, not had much time to focus on the project recently so it's been a long time tweaking bits and bobs here and there. Very ready to move on to something less design-oriented!
 

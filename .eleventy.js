@@ -4,6 +4,7 @@ const mdsup = require("markdown-it-sup");
 module.exports = function (eleventyConfig) {
   eleventyConfig.addPassthroughCopy("src/assets/**/*");
   eleventyConfig.addPassthroughCopy("src/blog/**/img/*");
+  eleventyConfig.addPassthroughCopy("src/blog/**/img/**/*");
   eleventyConfig.addPassthroughCopy("src/projects/**/img/*");
   eleventyConfig.addPassthroughCopy("src/play/**/*");
 

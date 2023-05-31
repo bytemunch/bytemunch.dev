@@ -3,7 +3,7 @@ title: dodgey ball devlog 3
 tags: [dev, game, dodgeball, dodgey-ball, javascript, typescript, web, ui]
 date: 2021-10-25
 description: ui work
-thumbnail: dodgey-ball-logo.png
+thumbnail: dodgey-ball/dodgey-ball-logo.png
 ---
 
 ## User Interfaces
@@ -21,11 +21,11 @@ Nothing's popped up on a quick google, so looks like I'm implementing that from 
 
 But I'm getting ahead of myself, let's design some buttons first.
 
-![new buttons: setup screen](/blog/img/newbuttons-matchsetup.png)
+![new buttons: setup screen](/blog/dodgey-ball/img/newbuttons-matchsetup.png)
 
 This'll do for now, the colours aren't going to be finalized until I've decided on the game's whole artstyle, but these will do as a stand-in while I work on some other features.
 
-![new buttons: controller setup](/blog/img/newbuttons-controllersetup.png)
+![new buttons: controller setup](/blog/dodgey-ball/img/newbuttons-controllersetup.png)
 
 So next up I'll create a more robust screen management system to move between, open and close different menu screens, which are going to be implemented as Custom Elements so they can handle their own actions.
 
@@ -78,7 +78,7 @@ customElements.define('ce-custom-element', CustomElement);
 
 Everything that needs functionality will extend this class, which provides me with an inheritance based CSS tree and pulls the HTML content from a template in index.html
 
-![navigating the new menus](/blog/img/newmenus.gif)
+![navigating the new menus](/blog/dodgey-ball/img/newmenus.gif)
 
 ### Page Management
 
@@ -148,7 +148,7 @@ gamepadMove(direction) {
 
 It ain't the prettiest, but it works... With arrow keys. Now to feed it gamepad inputs while in menu.
 
-![controller navigation](/blog/img/controller-nav.gif)
+![controller navigation](/blog/dodgey-ball/img/controller-nav.gif)
 
 Controller menuing done! A much less elegant solution than I would have liked, but it's good enough for purpose so I can't complain. I bumped the border width up on menu items but a fair chunk too, it was really hard to see what was selected at a glance.
 
