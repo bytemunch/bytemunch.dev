@@ -2,6 +2,8 @@
 title: fertiliser farmer
 description: a mobile merging game based on literal shit
 link: /play/fertiliser-farmer
+repo: https://github.com/bytemunch/fertiliser-farmer
+date: 2020-08-19
 ---
 
 ## what's this?
