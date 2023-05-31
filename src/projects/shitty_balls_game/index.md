@@ -1,5 +1,6 @@
 ---
 title: shitty balls game
+project: shitty balls game
 description: ball shooting mobile game
 date: 2021-10-13
 link: /play/shitty-balls-game

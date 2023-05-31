@@ -5,6 +5,7 @@ repo: https://github.com/bytemunch/dodgey-ball-prototype
 link: /play/dodgey-ball
 description: the first incarnation of my dodgeball game
 blog: dodgey-ball
+project: dodgey ball (prototype)
 ---
 
 ## what's this?

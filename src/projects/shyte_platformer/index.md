@@ -1,5 +1,6 @@
 ---
 title: shyte platformer
+project: shyte platformer
 date: 2022-02-28
 link: https://bytemunch.itch.io/shyte-platformer
 repo: https://github.com/bytemunch/shyte-platformer

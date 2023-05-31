@@ -4,14 +4,17 @@
         document.querySelector("html").setAttribute("data-theme", localStorage.getItem("theme") || "light");
     </script>
     <head>
-        <link rel="stylesheet" href="{{ '/assets/css/styles.css' | url }}">
-        <!-- eleventy-plugin-metagen -->
+        <link
+        rel="stylesheet" href="{{ '/assets/css/styles.css' | url }}"> <!-- eleventy-plugin-metagen -->
+        {%- set alt -%}
+        {%- include "src/projects/"+project|replace(" ","_")+"/img/thumb.alt" -%}
+        {%- endset -%}
         {% metagen 
             title=title + " - bytemunch.dev",
             desc=description or "sam's portfolio + blog",
             url="https://bytemunch.dev"+page.url,
-            img=thumbnail or "/projects/"+project+"/img/thumb.png",
-            img_alt=thumbnail_alt or "project thumbnail",
+            img="/projects/"+project|replace(" ","_")+"/img/thumb.png",
+            img_alt=  alt,
             twitter_card_type="summary_large_image",
             twitter_handle="bytemunch",
             name="Sam Edelsten",

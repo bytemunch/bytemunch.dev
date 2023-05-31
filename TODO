@@ -1,3 +1,5 @@
+DRY: project + title in project front matter
+
 display project release dates
 
 if post/project description too long, add ellipses
@@ -6,7 +8,7 @@ blog content search (just use google)
 
 rss
 
-nojs: funding shoud start open and close with js
+nojs: funding should start open and close with js
 
 nojs: hide theme switcher
 

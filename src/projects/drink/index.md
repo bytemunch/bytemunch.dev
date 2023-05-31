@@ -1,5 +1,6 @@
 ---
 title: drink
+project: drink
 date: 2021-08-26
 description: a multiplayer realtime drinking game app.
 repo: https://github.com/bytemunch/drink
