@@ -1,7 +1,7 @@
 {% macro from(post) %}
     <a href="{{ post.url }}" class="post-link">
         <div class="thumbnail">
-            <img src="/blog/img/{{ post.data.thumbnail }}" alt="post thumbnail"/>
+            <img src="/projects/{{ post.data.project | replace(" ","_") }}/img/thumb.png" alt="post thumbnail"/>
         </div>
         <div class="info">
             <h2>{{ post.data.title }}</h2>

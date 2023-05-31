@@ -3,7 +3,7 @@ title: dodgey ball devlog 2
 tags: [dev, game, dodgeball, dodgey-ball, javascript, typescript, web]
 date: 2021-10-22
 description: more prototyping
-thumbnail: dodgey-ball/dodgey-ball-logo.png
+project: dodgey ball (prototype)
 ---
 
 ## Resets and Win Scenarios

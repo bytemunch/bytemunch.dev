@@ -3,7 +3,7 @@ title: dodgey ball devlog 4
 tags: [dev, game, dodgeball, dodgey-ball, javascript, typescript, web, input]
 date: 2021-10-26
 description: game needs controls
-thumbnail: dodgey-ball/dodgey-ball-logo.png
+project: dodgey ball (prototype)
 ---
 
 ## Control Methods

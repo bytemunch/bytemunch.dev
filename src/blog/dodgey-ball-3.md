@@ -3,7 +3,7 @@ title: dodgey ball devlog 3
 tags: [dev, game, dodgeball, dodgey-ball, javascript, typescript, web, ui]
 date: 2021-10-25
 description: ui work
-thumbnail: dodgey-ball/dodgey-ball-logo.png
+project: dodgey ball (prototype)
 ---
 
 ## User Interfaces

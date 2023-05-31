@@ -3,7 +3,7 @@ title: dodgey ball devlog 6
 tags: [dev, game, dodgeball, dodgey-ball, javascript, typescript, web, input]
 date: 2022-01-29
 description: end of the line
-thumbnail: dodgey-ball/dodgey-ball-logo.png
+project: dodgey ball (prototype)
 ---
 
 Been a long time since my last devlog, whoopsie. Let's see if I can remember how to write.
