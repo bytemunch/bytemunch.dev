@@ -4,26 +4,26 @@
 
 :root {
     --background-color: #ffffff;
-    --text-color: #000000aa;
-    --text-color-light: #00000066;
-    --text-color-dark: #000000ee;
-    --link-color: #0000ffaa;
-    --link-color-visited: #6600eeaa;
-    --border-color: #000000aa;
-    --border-color-dark: #000000ee;
-    --border-color-light: #00000066;
+    --text-color: #555;
+    --text-color-light: #aaa;
+    --text-color-dark: #111;
+    --link-color: #2e2eff;
+    --link-color-visited: #8731A0;
+    --border-color: #555;
+    --border-color-dark: #111;
+    --border-color-light: #aaa;
 }
 
 :root[data-theme='dark'] {
     --background-color: #212121;
-    --text-color: #ffffffaa;
-    --text-color-light: #ffffff66;
-    --text-color-dark: #ffffffee;
-    --link-color: #8888ffaa;
-    --link-color-visited: #cc99ffaa;
-    --border-color: #ffffffaa;
-    --border-color-dark: #ffffffee;
-    --border-color-light: #ffffff66;
+    --text-color: #aaa;
+    --text-color-light: #666;
+    --text-color-dark: #eee;
+    --link-color: #8888ff;
+    --link-color-visited: #C4A0DA;
+    --border-color: #aaa;
+    --border-color-dark: #eee;
+    --border-color-light: #666;
 }
 
 html {
@@ -95,6 +95,8 @@ a:hover {
     position: absolute;
     top: 0.5em;
     right: 0.5em;
+    cursor: pointer;
+    user-select: none;
 }
 
 h2 a,

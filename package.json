@@ -15,5 +15,8 @@
     "@11ty/eleventy": "^2.0.1",
     "markdown-it-sub": "^1.0.0",
     "markdown-it-sup": "^1.0.0"
+  },
+  "dependencies": {
+    "eleventy-plugin-metagen": "^1.7.11"
   }
 }

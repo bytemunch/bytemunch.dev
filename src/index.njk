@@ -19,13 +19,12 @@ layout: base
     {% endfor %}
 </div>
 <a href="projects" class="see-more">see more...</a>
-
 <a href='blog'>
     <h2>blog</h2>
 </a>
 <p>recent posts</p>
 <div id="recent-posts">
-    {% set arr = collections.post | reverse%}
+    {% set arr = collections.post | reverse %}
     {% for i in range(0,2) %}
         {% if arr[i] %}
             {% import 'macros/post_card.njk' as post_card %}
@@ -34,7 +33,6 @@ layout: base
     {% endfor %}
 </div>
 <a href="blog" class="see-more">see more...</a>
-
 <div id="funding" class="closed">
     <h2 onclick=" let div = document.querySelector('#funding'); let h2 = document.querySelector('#funding h2'); if
             (div.classList.contains('closed')) { div.classList.remove('closed'); h2.textContent = 'funding ▲'; } else {
@@ -44,11 +42,19 @@ layout: base
         getting smaller once my little one goes to nursery, as i'll be going back to work. if you would like to support my
         projects, please
         <a href="https://monzo.me/samueljamesedelsten">stick some cash in my pocket</a>. put your @ in the message so i know who
-            to thank :) cheers</p>
+                        to thank :) cheers</p>
 </div>
 <h2>links</h2>
 <ul>
-    <a href="https://twitter.com/bytemunch">twitter</a> |
-    <a href="mailto:sam@bytemunch.dev">email</a> |
-    <a href="https://github.com/bytemunch">github</a>
+    <li>
+        <a href="https://twitter.com/bytemunch">twitter</a>
+        |
+    </li>
+    <li>
+        <a href="mailto:sam@bytemunch.dev">email</a>
+        |
+    </li>
+    <li>
+        <a href="https://github.com/bytemunch">github</a>
+    </li>
 </ul>

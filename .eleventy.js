@@ -1,7 +1,11 @@
 const mdsub = require("markdown-it-sub");
 const mdsup = require("markdown-it-sup");
+const metagen = require('eleventy-plugin-metagen');
 
 module.exports = function (eleventyConfig) {
+
+  eleventyConfig.addPlugin(metagen);
+
   eleventyConfig.addPassthroughCopy("src/assets/**/*");
   eleventyConfig.addPassthroughCopy("src/blog/**/img/*");
   eleventyConfig.addPassthroughCopy("src/blog/**/img/**/*");

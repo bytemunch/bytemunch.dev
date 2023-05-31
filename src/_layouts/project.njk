@@ -5,7 +5,7 @@ tags: [projects]
 ---
 
 <div class="project-header">
-    {%if link %}<a href="{{link}}">{%endif%}
+    {%if link %}<a href="{{link}}" target="_blank">{%endif%}
     <h1>{{ title }}</h1>
     {%if link %}</a>{%endif%}
     <p>{{ description }}</p>
@@ -14,11 +14,11 @@ tags: [projects]
 {{ content|safe }}
 <div class="links project-page">
     {% if link %}
-        <a href="{{ link }}">view</a>
+        <a href="{{ link }}" target="_blank">view</a>
         {% if repo %}|{% endif %}
     {% endif %}
     {% if repo %}
-        <a href="{{ repo }}">repo</a>
+        <a href="{{ repo }}" target="_blank">repo</a>
     {% endif %}
     {% if blog %}
         {% if repo or link %}|{% endif %}

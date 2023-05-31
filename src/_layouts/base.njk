@@ -4,11 +4,19 @@
         document.querySelector("html").setAttribute("data-theme", localStorage.getItem("theme") || "light");
     </script>
     <head>
-        <meta charset="UTF-8"/>
-        <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
-        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-        <title>{{ title }} - bytemunch.dev</title>
         <link rel="stylesheet" href="{{ '/assets/css/styles.css' | url }}">
+        <!-- eleventy-plugin-metagen -->
+        {% metagen 
+            title=title + " - bytemunch.dev",
+            desc=description or "sam's portfolio + blog",
+            url="https://bytemunch.dev"+page.url,
+            img=thumbnail or "/projects/"+project+"/img/thumb.png",
+            img_alt=thumbnail_alt or "project thumbnail",
+            twitter_card_type="summary_large_image",
+            twitter_handle="bytemunch",
+            name="Sam Edelsten",
+            generator="eleventy",
+            comments=true %}
     </head>
     <body>
         <div id="main">
@@ -24,13 +32,13 @@
                             <span class="title-secondary">slash</span>projects</a>
                     {%- endif -%}
                 </h1>
-                <a
+                <p
                     id="theme-switch"
                     href="javascript:void(0)"
                     onclick=" let theme = localStorage.getItem('theme') || 'light'; document.querySelector('#theme-switch').textContent =
                         theme; theme = theme == 'light' ? 'dark' : 'light'; localStorage.setItem('theme',theme);
                         document.querySelector('html').setAttribute('data-theme',theme); ">
-                    theme toggle</a>
+                    theme toggle</p>
                 <script>
                     let theme = localStorage.getItem('theme') || 'light';
                     document.querySelector('#theme-switch').textContent = theme == 'light'

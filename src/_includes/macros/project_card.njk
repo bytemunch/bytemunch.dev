@@ -11,11 +11,11 @@
         </a>
         <div class="links">
             {% if project.data.link %}
-                <a href="{{ project.data.link }}">view</a>
+                <a href="{{ project.data.link }}" target="_blank">view</a>
                 {% if project.data.repo %}|{% endif %}
             {% endif %}
             {% if project.data.repo %}
-                <a href="{{ project.data.repo }}">repo</a>
+                <a href="{{ project.data.repo }}" target="_blank">repo</a>
             {% endif %}
             {% if project.data.blog %}
                 {% if project.data.repo or project.data.link %}|{% endif %}
