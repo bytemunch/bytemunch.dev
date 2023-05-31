@@ -1,15 +1,15 @@
 ---
 title: untitled dodgeball game
 date: 2026-01-01
-description: a platformer, written in rust using bevy. rather unserious.
+description: the ressurected multiplayer dodgeball arcade game
 blog: temp-new-dodgeball-game-name
 ---
 
 ## what's this?
 
-multiplayer arcade-y dodgeball game. online & couch multiplayer. online couch co-op.
+my current project. multiplayer arcade-y dodgeball game. online & couch multiplayer. online couch co-op.
 
-## Tech
+## tech
 
 engine: bevy
 
@@ -17,7 +17,7 @@ physics: rapier
 
 networking: probably GGRS (+matchbox?)
 
-## Art Tools
+## art tools
 
 3D: blender
 
