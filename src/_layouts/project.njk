@@ -9,7 +9,7 @@ tags: [projects]
     <h1>{{ title }}</h1>
     {%if link %}</a>{%endif%}
     <p>{{ description }}</p>
-    <img src="./img/thumb.png" alt="{{ title }} thumbnail" class="thumb"/>
+    <img src="./img/thumb.png" alt="{{ title }} thumbnail" class="thumb {%if title=="ad exec"%}pixelated{%endif%}"/>
 </div>
 {{ content|safe }}
 <div class="links project-page">

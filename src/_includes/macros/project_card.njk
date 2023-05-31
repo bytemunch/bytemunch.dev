@@ -2,7 +2,7 @@
     <div class="project-card">
         <a href="{{ project.url }}">
             <div class="thumbnail">
-                <img src="/projects/{{ project.data.title|replace(" ","_") }}/img/thumb.png" alt="project thumbnail"/>
+                <img src="/projects/{{ project.data.title|replace(" ","_") }}/img/thumb.png" alt="project thumbnail" class="{%if project.data.title=="ad exec"%}pixelated{%endif%}"  />
             </div>
             <div class="info">
                 <h2>{{ project.data.title }}</h2>

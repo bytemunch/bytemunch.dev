@@ -305,7 +305,11 @@ li {
     grid-row-end: 3;
     grid-column-start: 2;
     grid-column-end: 3;
-    max-height: 128px;
+    height: 128px;
+}
+
+img.pixelated {
+    image-rendering: pixelated;
 }
 
 /* search */
