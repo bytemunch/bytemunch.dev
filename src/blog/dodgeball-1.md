@@ -1,7 +1,7 @@
 ---
 title: dodgeball login
 tags: [temp-new-dodgeball-game-name, dev, game, rust, firebase, auth, oauth2, firestore]
-date: 2023-05-09
+date: 2023-05-10
 project: untitled dodgeball game
 description: auth is hard
 ---
@@ -104,6 +104,6 @@ println!("Value: {:?}\n", value);
 
 This bit of code uses the Firebase IdToken to retrieve data from firestore, according to the firestore rules (non-authed requests error out correctly). I need to do some research into how to effectively navigate nested JSON in Rust, or maybe just write some helper functions. I haven't even looked at learning macros yet, maybe they'll help? I'll cross that bridge when I come to it.
 
-Good enough for the day. Next update here should bring the rest of CRUD, JSON parsing, and a refactor to prepare the firestore interface for use in Bevy.
+Good enough for the day. Next update for this project should bring the rest of CRUD, JSON parsing, and a refactor to prepare the firestore interface for use in Bevy.
 
-"Tomorrow" I'll get this blog online.
+Next up: get this blog online.
