@@ -12,7 +12,7 @@ I've made plenty of websites in my time. All of which have been AJAX/SPA and hea
 
 ## Easy Blogging
 
-Writing devlogs and blog posts with my old site had a fair amount of friction, tagging and linking posts, keeping a flatfile database for timestamps, custom scripts to invoke markdown-it... Eleventy handles all of this effortlessly. With front matter tagging and dating, automatic tag page generation, pagination, writing a new post is as simple as spewing thoughts into a file and saving. Hopefully this leads to more blogs, which spur me on to more code!
+Writing devlogs and blog posts with my old site had a fair amount of friction, tagging and linking posts, keeping a flatfile database for timestamps, custom scripts to invoke markdown-it... Eleventy handles all of this effortlessly. With front matter tagging and dating, automatic tag page generation, pagination, and more, writing a new post is as simple as spewing thoughts into a file and saving. Hopefully this leads to more blogs, which spur me on to more code!
 
 ## What's next?
 

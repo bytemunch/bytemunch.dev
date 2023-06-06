@@ -6,15 +6,15 @@ project: untitled dodgeball game
 description: man loses mind ft. firestore + gRPC
 ---
 
-<!-- Good enough for the day. Next update here should bring the rest of CRUD, JSON parsing, and a refactor to prepare the firestore interface for use in Bevy. -->
+## thoughtstream
 
-Let's start checking off the list of operations. Last update we got reading data working, so only three operations to go! I'll start by putting the read system into it's own function.
+Let's start checking off the list of CRUD operations. Last update we got reading data working, so only three operations to go! I'll start by putting the read system into it's own function.
 
 Ah, I'm rusty ~haha~ and just spent half an hour fighting the borrow checker. 
 
 After a little research into using serde with firestore, I've found a wealth of crates that do what I'm trying to accomplish! Unfortunately they all seem to work with service accounts in mind, and I need per-user granularity for the firestore rules to work as planned.
 
-I'll have a play with [googleapis](https://github.com/mechiru/googapis) and see if my current auth tokens will work? Nope, service account focused.
+I'll have a play with [googapis](https://github.com/mechiru/googapis) and see if my current auth tokens will work? ~~Nope, service account focused.~~ Turns out the project targets old tonic.
 
 I've also learned that REST is old hat now, and I should use gRPC instead. [Tonic](https://github.com/hyperium/tonic) is apparently the way forward.
 
