@@ -1,6 +1,6 @@
 ---
 title: Firestore rules
-tags: [temp-new-dodgeball-game-name, dev, game, rust, firebase,  firestore, rules, data]
+tags: [temp-new-dodgeball-game-name, dev, game, firebase,  firestore, rules, data]
 date: 2023-06-06
 project: untitled dodgeball game
 description: designing data structure and deploying rules for the dodgeball game's backend
@@ -12,7 +12,7 @@ Firestore stores documents, which contain fields, which hold values. Documents l
 
 I've been using Firestore a fair amount over the last few years, so I should be able to design my data structures with this in mind, right? ...riiight?
 
-I'll need to store data with many different access rights. Lobbys will need to be publically viewable (at lobby creator's discretion), and only editable in conjunction with the correct password, which is stored in a user's private settings. I hope to hack around with data validation workflows for lobby password authentication in order to save me from needing cloud functions.
+I'll need to store data with many different access rights. Lobbies will need to be publicly viewable (at lobby creator's discretion), and only editable in conjunction with the correct password, which is stored in a user's private settings. I hope to hack around with data validation workflows for lobby password authentication in order to save me from needing cloud functions.
 
 
 Here's some scribbles: ~(forgive\ my\ handwriting)~
@@ -25,7 +25,7 @@ Here's some scribbles: ~(forgive\ my\ handwriting)~
 
 You can see in these examples where the Collection/Document/Collection layout makes a bit of a mess. I despise useless names for things, like a document called 'Data', but I can't think of any better name, it stores a broad range of data.
 
-I also cannot have a collection for RoomSettings, that'll need a document under it. RoomSettings will be publically viewable.
+I also cannot have a collection for RoomSettings, that'll need a document under it. RoomSettings will be publicly viewable.
 
 ~i\ think\ i\ need\ a\ spreadsheet\ for\ all\ the\ access\ rights~
 
@@ -103,6 +103,6 @@ service cloud.firestore {
 }
 ```
 
-After testing these rules with the firestore playground, I'm fairly confident it won't leak lobby passwords. I'll need to add rate limiting to prevent bruteforcing, but this will do for now.
+After testing these rules with the firestore playground, I'm fairly confident it won't leak lobby passwords. I'll need to add rate limiting to prevent brute-forcing, but this will do for now.
 
 Refreshing tokens is next on the cards, as currently a login will only last an hour.

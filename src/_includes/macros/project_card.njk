@@ -19,7 +19,7 @@
             {% endif %}
             {% if project.data.blog %}
                 {% if project.data.repo or project.data.link %}|{% endif %}
-                <a href="/blog/tags/{{ project.data.blog }}">devlog</a>
+                <a href="/blog/tags/{{ project.data.blog | lower}}">devlog</a>
             {% endif %}
         </div>
     </div>

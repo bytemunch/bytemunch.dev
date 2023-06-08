@@ -22,11 +22,11 @@ Once I've got my head around all this I should be ready to utilise [firestore-se
 
 ~several\ hours\ of\ documentation\ reading\ later...~
 
-I feel like I'm struggling so much with the auth side of the API bacause of foundational gaps in my knowledge when it comes to HTTP requests and RPC.
+I feel like I'm struggling so much with the auth side of the API because of foundational gaps in my knowledge when it comes to HTTP requests and RPC.
 
 Okay so nah fuck all that noise, I'm going to see if the [firestore](https://crates.io/crates/firestore) crate will accept a JWT, as I already have access to that token.
 
-Passing my token as credentials with that crate didnt work. I'm just going to roll my own for now. 
+Passing my token as credentials with that crate didn't work. I'm just going to roll my own for now. 
 
 So new plan: auth using REST and then firestore over RPC, as the REST API has no listening ability, and I would like the lobby browser to auto update. Polling sounds both expensive and cumbersome.
 

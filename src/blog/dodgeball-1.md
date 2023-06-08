@@ -42,7 +42,7 @@ let email_res = http_client(HttpRequest {
 After poking the API for hours I've managed to convert my OAuth login to a Firebase account login.
 
 >![](/blog/img/dodgeball/nocompile.png)
-> This wouldn't compile with liquid, I dont know enough about eleventy to reason why yet. So here's a screenshot.
+> This wouldn't compile with liquid, I don't know enough about eleventy to reason why yet. So here's a screenshot.
 
 After running this after getting the initial OAuth token and checking my firebase authentication dashboard...
 

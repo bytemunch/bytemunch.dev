@@ -23,7 +23,7 @@ But I'm getting ahead of myself, let's design some buttons first.
 
 ![new buttons: setup screen](/blog/dodgey-ball/img/newbuttons-matchsetup.png)
 
-This'll do for now, the colours aren't going to be finalized until I've decided on the game's whole artstyle, but these will do as a stand-in while I work on some other features.
+This'll do for now, the colours aren't going to be finalized until I've decided on the game's whole art style, but these will do as a stand-in while I work on some other features.
 
 ![new buttons: controller setup](/blog/dodgey-ball/img/newbuttons-controllersetup.png)
 
@@ -117,9 +117,9 @@ I hate state management. That codeblock was a good 45 minute headache. But it se
 
 ### Gamepad Menuing
 
-Now to set about getting the menus navigatable with a gamepad. My initial thought for how to go about this was to add a 2D array to each page and keep track of what element is on each side of the others, but I'd like to look into if I can use the CSS grid that the screens are laid out on to sort this all out programatically.
+Now to set about getting the menus navigable with a gamepad. My initial thought for how to go about this was to add a 2D array to each page and keep track of what element is on each side of the others, but I'd like to look into if I can use the CSS grid that the screens are laid out on to sort this all out programmatically.
 
-After a bit of research, realising that CSS doesn't expose the grid in an easily digestable way, and thinking that a position array would be overkill, I've settled on hardcoding *(eww)* the directional neighbours on the screen element.
+After a bit of research, realising that CSS doesn't expose the grid in an easily digestible way, and thinking that a position array would be overkill, I've settled on hardcoding *(eww)* the directional neighbours on the screen element.
 
 ```ts
 gamepadDirections = {

@@ -2,7 +2,7 @@
 title: dodgey ball devlog 5
 tags: [dev, game, dodgeball, dodgey-ball, javascript, typescript, web, input, multiplayer]
 date: 2021-11-22
-description: multiplayer preperation
+description: multiplayer preparation
 project: dodgey ball (prototype)
 ---
 

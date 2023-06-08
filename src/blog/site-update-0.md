@@ -8,7 +8,7 @@ project: bytemunch.dev
 
 ## KISS to the max
 
-I've made plenty of websites in my time. All of which have been AJAX/SPA and heavily dependant on Javascript. All of which have been slow to first paint. This time I've gone for something different: the new old way, using eleventy and hosting a static site. Keeping everything as simple as possible should be great for accessibility, SEO and maintainence, and should be easy to keep looking clean.
+I've made plenty of websites in my time. All of which have been AJAX/SPA and heavily dependant on Javascript. All of which have been slow to first paint. This time I've gone for something different: the new old way, using eleventy and hosting a static site. Keeping everything as simple as possible should be great for accessibility, SEO and maintenance, and should be easy to keep looking clean.
 
 ## Easy Blogging
 

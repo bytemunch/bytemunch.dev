@@ -11,7 +11,7 @@ project: dodgey ball (prototype)
 We left off after a successful initial playtest, with players throwing balls and getting score. But to start a new game, the whole page needed refreshing. And the game has no concept of winning or losing. We also saw some funny collisions, funky control issues, and I've realized that drawing object's front faces isn't ideal. Let's fix that.
 
 ### Front faces?
-A 3D object projected in 2D space has depth, but we draw none of that depth, which on such a small playfield I figured wouldn't be an issue. The problem is that drawing the objects at their Z co-ordinate produces a projection at the front face of the object, wheras drawing at the center Z co-ord would possibly provide a better idea of the object's location in space.
+A 3D object projected in 2D space has depth, but we draw none of that depth, which on such a small playfield I figured wouldn't be an issue. The problem is that drawing the objects at their Z co-ordinate produces a projection at the front face of the object, whereas drawing at the center Z co-ord would possibly provide a better idea of the object's location in space.
 
 from
 
@@ -67,7 +67,7 @@ As it stands its not too easy to tell where something is on the Z axis easily. I
 
 ### Simplifying Controls
 
-To fix the useability issue around aiming and shooting, I'll use the left stick's direction to aim if the right stick is neutral. And while we're at it let's make shooting and pick-up context dependant.
+To fix the usability issue around aiming and shooting, I'll use the left stick's direction to aim if the right stick is neutral. And while we're at it let's make shooting and pick-up context dependant.
 
 ### Playtesting
 

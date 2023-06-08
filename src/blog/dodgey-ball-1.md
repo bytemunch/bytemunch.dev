@@ -12,7 +12,7 @@ Dodgey Ball is supposed to be a multiplayer game. So far we have player and ball
 
 ### The Multiplayer
 
-Adding this was simple enough. Another player object in the scene, and let the players track their team. Give the second player a controler and done.
+Adding this was simple enough. Another player object in the scene, and let the players track their team. Give the second player a controller and done.
 
 ![two players!](/blog/dodgey-ball/img/2-players.gif)
 

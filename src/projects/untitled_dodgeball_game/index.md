@@ -2,7 +2,7 @@
 title: untitled dodgeball game
 project: untitled dodgeball game
 date: 2026-01-01
-description: the ressurected multiplayer dodgeball arcade game
+description: the resurrected multiplayer dodgeball arcade game
 blog: temp-new-dodgeball-game-name
 ---
 

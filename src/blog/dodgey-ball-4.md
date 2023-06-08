@@ -22,7 +22,7 @@ if (kb['E']) { vec3.rotateY(target, target, [0, 0, 0], 0.1) };
 
 Super easy! So glad I didn't have to do the math myself.
 
-I also added direct targeting with the numpad. I don't expect many keyboard controller players *(I don't expect many players at all)* but at least the option's there. In future I'd like to imporove the code by having the target move to the defined vector over time, but I don't see that as priority for now.
+I also added direct targeting with the numpad. I don't expect many keyboard controller players *(I don't expect many players at all)* but at least the option's there. In future I'd like to improve the code by having the target move to the defined vector over time, but I don't see that as priority for now.
 
 ### Touchscreen
 
