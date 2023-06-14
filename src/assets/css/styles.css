@@ -198,9 +198,14 @@ h2 a:hover,
     position: relative;
 }
 
+.post-link .thumbnail {
+    flex-basis: 90px;
+    flex-grow: 0;
+    flex-shrink: 0;
+}
+
 .post-link .thumbnail img {
     width: 5em;
-    margin: 0.25em 1em 0.25em 0.25em;
 }
 
 .post-link .date {
