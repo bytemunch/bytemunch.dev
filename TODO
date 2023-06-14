@@ -17,3 +17,6 @@ nojs: funding should start open and close with js
 nojs: hide theme switcher
 
 make clear that drink is in finished state in the app
+
+BLOG POSTS: add title image to blog post like project page
+(shared header for project and blog pages)

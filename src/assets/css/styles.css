@@ -230,7 +230,7 @@ h2 a:hover,
 
 #post-header .date {
     position: absolute;
-    top: 0.5em;
+    top: -1em;
     right: 0.5em;
 }
 
