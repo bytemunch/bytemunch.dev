@@ -3,3 +3,4 @@ _site
 *~
 deploy.sh
 tmp
+.vscode

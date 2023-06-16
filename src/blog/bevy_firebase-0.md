@@ -1,6 +1,6 @@
 ---
-title: Bevy + Firebase (Auth + Firestore)
-tags: [bevy_firebase, dev, game, rust, firebase,  firestore, oauth2, auth, bevy]
+title: Bevy + Firebase
+tags: [bevy_firebase, dev, game, rust, firebase, oauth2, auth, bevy]
 date: 2023-06-14
 project: bevy_firebase
 description: creating a bevy plugin for firebase
