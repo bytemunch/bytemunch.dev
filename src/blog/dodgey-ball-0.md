@@ -36,15 +36,15 @@ Target reticle, throw ball button, pickup ball button, sprint button, all easy e
 
 And now add some collision and...
 
-![awful collision](/blog/dodgey-ball/img/yeet-collision.gif)
+![awful collision](/blog/img/dodgey-ball/yeet-collision.gif)
 
 and...
 
-![sticky collision](/blog/dodgey-ball/img/sticky-collision.gif)
+![sticky collision](/blog/img/dodgey-ball/sticky-collision.gif)
 
 AND...
 
-![ok collision](/blog/dodgey-ball/img/ok-collision.gif)
+![ok collision](/blog/img/dodgey-ball/ok-collision.gif)
 
 Ok. We can work with that.
 

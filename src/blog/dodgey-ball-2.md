@@ -23,7 +23,7 @@ to
 
 So now we need to sort by the center Z of the objects rather than their front Z co-ord to get accurate layering.
 
-![much easier targeting](/blog/dodgey-ball/img/v-easy-throws.gif)
+![much easier targeting](/blog/img/dodgey-ball/v-easy-throws.gif)
 
 Yeah that feels better. But here we spot a bug where the live ball isn't being coloured red! Hmm.
 
@@ -31,17 +31,17 @@ Yeah that feels better. But here we spot a bug where the live ball isn't being c
 
 While I was fixing the ball colouring code I updated it so the ball reflects the colour of the team who threw it.
 
-![colour is back](/blog/dodgey-ball/img/colour-fix.gif)
+![colour is back](/blog/img/dodgey-ball/colour-fix.gif)
 
 ### Game Resetting
 
 Let's add a quick function to reset the game whenever we need. For now we'll reset when a team reaches 3 points.
 
-![game resets after 3 points scored](/blog/dodgey-ball/img/reset.gif)
+![game resets after 3 points scored](/blog/img/dodgey-ball/reset.gif)
 
 Let's let the player decide their score limits, and give some feedback to show the match winner before continuing. I'll use HTML overlays for this, as it's less effort than another canvas UI object.
 
-![menuing](/blog/dodgey-ball/img/menuing.gif)
+![menuing](/blog/img/dodgey-ball/menuing.gif)
 
 Of course further down the line this will be revamped to accept controller input, but it'll do for now.
 
@@ -49,7 +49,7 @@ Of course further down the line this will be revamped to accept controller input
 
 Next up is adding a time limit to games. Easy enough, find the [best way](https://gist.github.com/jakearchibald/cb03f15670817001b1157e62a076fe95) to implement a second by second countdown and add a UIObject that displays the seconds left.
 
-![timer implemented](/blog/dodgey-ball/img/timer.gif)
+![timer implemented](/blog/img/dodgey-ball/timer.gif)
 
 ### Ballsitting
 
@@ -57,13 +57,13 @@ In real-life dodgeball there's a rule to prevent a team holding all the balls an
 
 Five seconds of keeping all the balls, and they're given to your opponent. Nice! Just needs some sort of feedback for the player to understand what's going on.
 
-![balls removed!](/blog/dodgey-ball/img/ballswap.gif)
+![balls removed!](/blog/img/dodgey-ball/ballswap.gif)
 
 ### Depth Perception
 
 As it stands its not too easy to tell where something is on the Z axis easily. I'm not going to get into spot shadows below objects just yet, but I'll happily add a few lines crossing the playfield for now.
 
-![lines on floor](/blog/dodgey-ball/img/floorlines.gif)
+![lines on floor](/blog/img/dodgey-ball/floorlines.gif)
 
 ### Simplifying Controls
 
@@ -73,7 +73,7 @@ To fix the usability issue around aiming and shooting, I'll use the left stick's
 
 So me and my partner jumped in to another game with the updated control scheme. Simplifying the controls seems to have done the trick, as we were much more evenly matched this time around!
 
-![another playtest](/blog/dodgey-ball/img/playtest2-3.gif)
+![another playtest](/blog/img/dodgey-ball/playtest2-3.gif)
 
 There was a bug where time ending would always declare a draw, but that was quick enough to squash.
 
@@ -85,7 +85,7 @@ First off we need some sort of feedback when the balls are swapped because of on
 
 For now I'll add a quick and dirty counter above the player that needs to throw next.
 
-![throw counter displayed above player](/blog/dodgey-ball/img/throw-counter.gif)
+![throw counter displayed above player](/blog/img/dodgey-ball/throw-counter.gif)
 
 This adds a good bit of urgency, and hopefully makes the game feel more fair when your advantage gets flipped.
 
@@ -94,7 +94,7 @@ This adds a good bit of urgency, and hopefully makes the game feel more fair whe
 
 The game starts as soon as you press play, which gives no build-up or room to prepare for the match. A simple 3 second countdown before the match should fix this.
 
-![countdown before the match](/blog/dodgey-ball/img/countdown.gif)
+![countdown before the match](/blog/img/dodgey-ball/countdown.gif)
 
 Sweet.
 

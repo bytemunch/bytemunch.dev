@@ -14,15 +14,15 @@ Dodgey Ball is supposed to be a multiplayer game. So far we have player and ball
 
 Adding this was simple enough. Another player object in the scene, and let the players track their team. Give the second player a controller and done.
 
-![two players!](/blog/dodgey-ball/img/2-players.gif)
+![two players!](/blog/img/dodgey-ball/2-players.gif)
 
 However after doing this and throwing a few balls, I noticed a couple things. Mainly that landing a shot is difficult, which is not ideal for the game's aim of being a quick bit of pick up and play fun.
 
-![it's hard to aim](/blog/dodgey-ball/img/hard-to-aim.gif)
+![it's hard to aim](/blog/img/dodgey-ball/hard-to-aim.gif)
 
 This could be down to either the reticle not projecting in 3d correctly, or that the target and projectile are too small. Let's fix both of these things!
 
-![bigger target easier game](/blog/dodgey-ball/img/easy-throw.gif)
+![bigger target easier game](/blog/img/dodgey-ball/easy-throw.gif)
 
 Much better.
 
@@ -35,16 +35,16 @@ So here we have a multiplayer ball-throwing simulator. Let's add some game logic
 
 First let's make a new camera *(please no)* for drawing without perspective and throw a box up on the canvas, making sure to give the UI elements a Z value of `Infinity` to allow for appropriate z-sorting.
 
-![yes, box](/blog/dodgey-ball/img/BOX.png)
+![yes, box](/blog/img/dodgey-ball/BOX.png)
 >ah yes, box. refreshing to do something slightly useful after pissing about with that camera.
 
 Track score, make a UI object for the canvas to display said score, project 'em with our XY camera, and edit the collision logic on players.
 
-![scoreboard in action](/blog/dodgey-ball/img/scoreboard.gif)
+![scoreboard in action](/blog/img/dodgey-ball/scoreboard.gif)
 
 Ready to test the prototype! Getting an initial playtest done fast was important for me to gauge whether there's a point in continuing development.
 
-![playtest](/blog/dodgey-ball/img/playtest2.gif)
+![playtest](/blog/img/dodgey-ball/playtest2.gif)
 
 Helpfully it was fun to play! Though there are some new issues that have arisen, given that my opponent doesn't play games that use aiming and firing, she struggled to aim and shoot at the same time. My planned remedy for this will be for the player's last aim position to be kept if the stick returns to neutral. Also there seemed to be a couple collision issues when firing, which I think on watching the game back was due to the thrown ball colliding with a stationary ball on the floor. Or maybe it was a neutral throw.
 
