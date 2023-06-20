@@ -99,6 +99,10 @@ a:hover {
     user-select: none;
 }
 
+#theme-switch:hover {
+    color: var(--text-color-dark);
+}
+
 h2 a,
 .title a,
 .title a:visited,
