@@ -240,6 +240,7 @@ h2 a:hover,
 
 #post {
     border-bottom: 1px dashed var(--border-color-dark);
+    padding-top: 1em;
 }
 
 #post img,
@@ -346,4 +347,26 @@ img.pixelated {
     display: block;
     margin: auto 10px;
     font-size: 1.2em;
+}
+
+/* blog */
+st:after,
+nd:after {
+    visibility: visible;
+    display: block;
+    overflow: visible;
+    height: 1.1em;
+    width: 100%;
+    color: var(--text-color-light);
+    border-top: 1px solid var(--border-color-light);
+    border-bottom: 1px solid var(--border-color-light);
+    text-align: center;
+}
+
+st:after {
+    content: 'some time passes';
+}
+
+nd:after {
+    content: 'a day passes';
 }
