@@ -29,6 +29,6 @@ Syntax highlighting for code blocks
 
 background + padding for code blocks
 
-top of post needs a little padding
-
 Expandable images (popover in future, for now just click to open in new tab)
+
+image styling is broken when not quoted

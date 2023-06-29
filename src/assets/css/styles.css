@@ -350,8 +350,8 @@ img.pixelated {
 }
 
 /* blog */
-st:after,
-nd:after {
+st::after,
+nd::after {
     visibility: visible;
     display: block;
     overflow: visible;
@@ -363,10 +363,23 @@ nd:after {
     text-align: center;
 }
 
-st:after {
+st::after {
     content: 'some time passes';
 }
 
-nd:after {
+nd::after {
     content: 'a day passes';
+}
+
+#post ul {
+    padding-left: 0;
+}
+
+#post ul li {
+    margin-left: 1em;
+    display: flex;
+}
+
+#post ul li::before {
+    content: "•";
 }
