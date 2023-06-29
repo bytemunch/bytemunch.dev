@@ -1,9 +1,9 @@
 ---
-title: bevy_firebase
-project: bevy_firebase
+title: bevy-firebase
+project: bevy-firebase
 date: 2023-01-07
 description: upcoming bevy plugin for firebase auth + firestore
-blog: bevy_firebase
+blog: bevy-firebase
 ---
 
 ## what's this?
