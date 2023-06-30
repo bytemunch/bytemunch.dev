@@ -126,8 +126,6 @@ The login URL is sent as an event, so simply listening for that event takes care
 
 If I want to make this repo public, I'll need to clean the history of any API keys that I hardcoded. This involved some sketchy warning ignoring, but seems to have worked. Don't copy [this approach](https://stackoverflow.com/a/63102595), there are probably much safer ways of doing things! Best practice now would be to invalidate all the keys anyway, but I'm in a test project that I'll delete entirely once this is released, so no problems there I guess? ^hope^
 
-<nd></nd>
-
 ## Next up
 
  - Better developer control over systems
