@@ -1,6 +1,6 @@
 ---
 title: Bevy + Firebase
-tags: [bevy-firebase, dev, game, rust, firebase, oauth2, auth, bevy]
+tags: [bevy-firebase, dev, game, rust, firebase, oauth2, auth, bevy, bevy-firebase-auth]
 date: 2023-06-14
 project: bevy-firebase
 description: creating a bevy plugin for firebase

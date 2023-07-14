@@ -1,6 +1,6 @@
 ---
 title: Adding firestore
-tags: [bevy-firebase, dev, game, rust, firebase, firestore, bevy]
+tags: [bevy-firebase, dev, game, rust, firebase, firestore, bevy, bevy-firebase-auth, bevy-firebase-firestore]
 date: 2023-06-29
 project: bevy-firebase
 description: adding firestore functionality to my bevy plugin

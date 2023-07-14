@@ -350,6 +350,11 @@ img.pixelated {
 }
 
 /* blog */
+
+video {
+    max-width: 100%;
+}
+
 st::after,
 nd::after {
     visibility: visible;
