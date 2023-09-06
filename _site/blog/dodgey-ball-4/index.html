@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+    <script>
+        document.querySelector("html").setAttribute("data-theme", localStorage.getItem("theme") || "light");
+    </script>
+    <head>
+        <link
+        rel="stylesheet" href="/assets/css/styles.css"> <!-- eleventy-plugin-metagen --><meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>dodgey ball devlog 4 - bytemunch.dev</title>
+	<meta name="author" content="Sam Edelsten">
+	<meta name="title" content="dodgey ball devlog 4 - bytemunch.dev">
+	<meta name="description" content="game needs controls">
+	<meta name="generator" content="eleventy">
+	<!-- Open Graph -->
+	<meta property="og:type" content="website">
+	<meta property="og:url" content="https://bytemunch.dev/blog/dodgey-ball-4/">
+	<meta property="og:locale" content="en_US">
+	<meta property="og:title" content="dodgey ball devlog 4 - bytemunch.dev">
+	<meta property="og:description" content="game needs controls">
+	<meta property="og:image" content="/projects/dodgey_ball_(prototype)/img/thumb.png">
+	<meta property="og:image:alt" content="red cartoon balloon font reading &quot;dodgey ball&quot;">
+	<!-- Twitter -->
+	<meta name="twitter:card" content="summary_large_image">
+	<meta name="twitter:site" content="@bytemunch">
+	<meta name="twitter:creator" content="@bytemunch">
+	<meta name="twitter:url" content="https://bytemunch.dev/blog/dodgey-ball-4/">
+	<meta name="twitter:title" content="dodgey ball devlog 4 - bytemunch.dev">
+	<meta name="twitter:description" content="game needs controls">
+	<meta name="twitter:image" content="/projects/dodgey_ball_(prototype)/img/thumb.png">
+	<meta name="twitter:image:alt" content="red cartoon balloon font reading &quot;dodgey ball&quot;">
+	<link rel="canonical" href="https://bytemunch.dev/blog/dodgey-ball-4/">
+    </head>
+    <body>
+        <div id="main">
+            <div class="title">
+                <h1>
+                    <a href="/">bytemunch<span class="title-secondary">dot</span>dev</a><a href="/blog" class="title-location">
+                            <span class="title-secondary">slash</span>blog</a></h1>
+                <p
+                    id="theme-switch"
+                    href="javascript:void(0)"
+                    onclick=" let theme = localStorage.getItem('theme') || 'light'; document.querySelector('#theme-switch').textContent =
+                        theme; theme = theme == 'light' ? 'dark' : 'light'; localStorage.setItem('theme',theme);
+                        document.querySelector('html').setAttribute('data-theme',theme); ">
+                    theme toggle</p>
+                <script>
+                    let theme = localStorage.getItem('theme') || 'light';
+                    document.querySelector('#theme-switch').textContent = theme == 'light'
+                        ? 'dark'
+                        : 'light';
+                </script>
+            </div>
+            
+
+
+<nav>
+    <ol class='post-paginate'>
+        <li>
+            Previous:
+            
+                <a href="/blog/dodgey-ball-3/">dodgey ball devlog 3</a>
+            
+        </li>
+        <li>
+            Next:
+            
+                <a href="/blog/dodgey-ball-5/">dodgey ball devlog 5</a>
+            
+        </li>
+    </ol>
+</nav>
+<div id="post-header">
+    <h1>dodgey ball devlog 4</h1>
+    <p>game needs controls</p>
+    <p class="date">26/10/2021</p>
+</div>
+<div id="post">
+    <h2>Control Methods</h2>
+<p>The plan today is to add two new control methods, starting with Keyboard/Mouse and moving on to a touchscreen overlay.</p>
+<h3>Keyboard and Mouse</h3>
+<p>Adding Keyboard support should be simple. I'm going to look in to creating a virtual controller for each player and abstracting the actual used control method away, allowing for easier expansion. This implementation should leave space for remapping.</p>
+<p>After creating a class to hold all possible player actions and take inputs, I've found that the method for aiming on a keyboard is going to require some thought. As I feel aiming by mouse position would be too overpowered compared to controller input, I'll rotate the target vector around the player based on button presses. This should be easy enough to implement with <code>gl-matrix</code>.</p>
+<pre><code class="language-ts">if (kb['Q']) { vec3.rotateY(target, target, [0, 0, 0], -0.1) };
+if (kb['E']) { vec3.rotateY(target, target, [0, 0, 0], 0.1) };
+</code></pre>
+<p>Super easy! So glad I didn't have to do the math myself.</p>
+<p>I also added direct targeting with the numpad. I don't expect many keyboard controller players <em>(I don't expect many players at all)</em> but at least the option's there. In future I'd like to improve the code by having the target move to the defined vector over time, but I don't see that as priority for now.</p>
+<h3>Touchscreen</h3>
+<p>This will be an interesting one. It seems like a common enough input method that there would be readily available code for touchscreen thumbsticks...</p>
+<p>Yup, here's a cool <a href="https://jsfiddle.net/aa0et7tr/5/">fiddle</a> from <a href="https://www.reddit.com/user/AndrewGreenh">/u/AndrewGreenh</a> that I can co-opt into the game.</p>
+<p><img src="/blog/img/dodgey-ball/touchscreen-controls.gif" alt="touch controls"></p>
+<p>That's working nicely, but I have a sneaking suspicion that multitouch is gonna bust this implementation up. I'll load it up on the phone and find out.</p>
+<p><img src="/blog/img/dodgey-ball/touchscreen-no-multi.gif" alt="touch controls, no multitouch"></p>
+<p>Oof, yup. Plenty to fix up here. We need to somehow prevent pinch-zoom, and filter the touch events to make sure they're for the respective joystick.</p>
+<p>Usability-wise I think that on mobile the ball should shoot in the aimed direction on release of the stick, as button pressing on a touchscreen is a terrible experience whichever way you slice it.</p>
+<p><img src="/blog/img/dodgey-ball/sticky-sticks.gif" alt="sticky sticks"></p>
+<p>Attempt 1 lead to sticky sticks.</p>
+<p><img src="/blog/img/dodgey-ball/unsticky-sticks.gif" alt="unsticky sticks"></p>
+<p>But expanding the zone I was doing the collision check in fixed it! Now to take a look at the zoom issue.</p>
+<pre><code class="language-html">&lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no&quot; /&gt;
+</code></pre>
+<p>Honestly SPA games on the web and accessibility just do not mix. I'll add some text-sizing stuff to help with visibility later on.</p>
+
+</div>
+
+
+<nav>
+    <ol class='post-paginate'>
+        <li>
+            Previous:
+            
+                <a href="/blog/dodgey-ball-3/">dodgey ball devlog 3</a>
+            
+        </li>
+        <li>
+            Next:
+            
+                <a href="/blog/dodgey-ball-5/">dodgey ball devlog 5</a>
+            
+        </li>
+    </ol>
+</nav>
+        </div>
+    </body>
+</html>

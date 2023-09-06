@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+    <script>
+        document.querySelector("html").setAttribute("data-theme", localStorage.getItem("theme") || "light");
+    </script>
+    <head>
+        <link
+        rel="stylesheet" href="/assets/css/styles.css"> <!-- eleventy-plugin-metagen --><meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>dodgey ball devlog 5 - bytemunch.dev</title>
+	<meta name="author" content="Sam Edelsten">
+	<meta name="title" content="dodgey ball devlog 5 - bytemunch.dev">
+	<meta name="description" content="multiplayer preparation">
+	<meta name="generator" content="eleventy">
+	<!-- Open Graph -->
+	<meta property="og:type" content="website">
+	<meta property="og:url" content="https://bytemunch.dev/blog/dodgey-ball-5/">
+	<meta property="og:locale" content="en_US">
+	<meta property="og:title" content="dodgey ball devlog 5 - bytemunch.dev">
+	<meta property="og:description" content="multiplayer preparation">
+	<meta property="og:image" content="/projects/dodgey_ball_(prototype)/img/thumb.png">
+	<meta property="og:image:alt" content="red cartoon balloon font reading &quot;dodgey ball&quot;">
+	<!-- Twitter -->
+	<meta name="twitter:card" content="summary_large_image">
+	<meta name="twitter:site" content="@bytemunch">
+	<meta name="twitter:creator" content="@bytemunch">
+	<meta name="twitter:url" content="https://bytemunch.dev/blog/dodgey-ball-5/">
+	<meta name="twitter:title" content="dodgey ball devlog 5 - bytemunch.dev">
+	<meta name="twitter:description" content="multiplayer preparation">
+	<meta name="twitter:image" content="/projects/dodgey_ball_(prototype)/img/thumb.png">
+	<meta name="twitter:image:alt" content="red cartoon balloon font reading &quot;dodgey ball&quot;">
+	<link rel="canonical" href="https://bytemunch.dev/blog/dodgey-ball-5/">
+    </head>
+    <body>
+        <div id="main">
+            <div class="title">
+                <h1>
+                    <a href="/">bytemunch<span class="title-secondary">dot</span>dev</a><a href="/blog" class="title-location">
+                            <span class="title-secondary">slash</span>blog</a></h1>
+                <p
+                    id="theme-switch"
+                    href="javascript:void(0)"
+                    onclick=" let theme = localStorage.getItem('theme') || 'light'; document.querySelector('#theme-switch').textContent =
+                        theme; theme = theme == 'light' ? 'dark' : 'light'; localStorage.setItem('theme',theme);
+                        document.querySelector('html').setAttribute('data-theme',theme); ">
+                    theme toggle</p>
+                <script>
+                    let theme = localStorage.getItem('theme') || 'light';
+                    document.querySelector('#theme-switch').textContent = theme == 'light'
+                        ? 'dark'
+                        : 'light';
+                </script>
+            </div>
+            
+
+
+<nav>
+    <ol class='post-paginate'>
+        <li>
+            Previous:
+            
+                <a href="/blog/dodgey-ball-4/">dodgey ball devlog 4</a>
+            
+        </li>
+        <li>
+            Next:
+            
+                <a href="/blog/dodgey-ball-6/">dodgey ball devlog 6</a>
+            
+        </li>
+    </ol>
+</nav>
+<div id="post-header">
+    <h1>dodgey ball devlog 5</h1>
+    <p>multiplayer preparation</p>
+    <p class="date">22/11/2021</p>
+</div>
+<div id="post">
+    <h2>Controller Selection</h2>
+<p>So if you've been reading along you may have noticed I've implemented full-screen touchscreen controls for one player, in a multiplayer game. Why? Online play. But before we get into all that I need to get the controller select screen working, doing controller detection and such on the way. In future I intend to allow 4-player couch play, but I'll keep working with only 2 for now for simplicity's sake.</p>
+<h3>A new Custom Element</h3>
+<p>To get the behaviour I want I'll again be making use of a custom element.</p>
+<p><img src="/blog/img/dodgey-ball/control-select.gif" alt="controller selection screen"></p>
+<p>Yup, that's what I'm looking for! Now to let the player objects pull from these elements' states, and that's controller selection functioning. Though in practise one player selecting all the control schemes is a bit clunky. I'm thinking that setting touch or keyboard controls should be done manually, while controllers auto-assign to their players and then go to team/character selection after. Or maybe make team/character/controller selection one screen? Market research time! What's everyone else doing?</p>
+<p><img src="/blog/img/dodgey-ball/notes-research.jpg" alt="image of notes 1"></p>
+<p>After looking at a few other games' controller setup screens, I have a better idea of what I want mine to be. Controllers should populate the next available player slot when the primary face button is pressed and free it up with the secondary face button. The same screen and element will be used to select a profile or character when it's populated, and all controllers but player 1's will be locked into their elements. I'll add a new screen after controller setup for team setup, à la FIFA, as keeping the two seperated will be better for adding online play later, where all players will be locked to one team. Team setup will also be where desicions about AI players will be made. Keyboard and touch controls will be selectable by clicking or tapping the join elements, and players should be colour coded.</p>
+<p>Well that's a lot of words. Time for some actual coding to get it all up and running!</p>
+<p><img src="/blog/img/dodgey-ball/controller-setup-4player.gif" alt="controller joining and player character selection"></p>
+<p>Needs some touchup work on the CSS side and some button prompts, but this screen's looking good functionally. I'll need to make (or pinch) a manifest of friendlier controller names to limit the space required to display controller types too, as names like <code>Wireless Controller (STANDARD GAMEPAD Vendor: 054c Product: 05c4)</code> and <code>Xbox 360 Controller (XInput STANDARD GAMEPAD)</code> aren't the nicest to look at.</p>
+<p><img src="/blog/img/dodgey-ball/controllers-friendly.png" alt="friendly controller names"></p>
+<p>Fab. I'm glad to be moving on from that screen, not had much time to focus on the project recently so it's been a long time tweaking bits and bobs here and there. Very ready to move on to something less design-oriented!</p>
+<p>Done for now. Cya.</p>
+
+</div>
+
+
+<nav>
+    <ol class='post-paginate'>
+        <li>
+            Previous:
+            
+                <a href="/blog/dodgey-ball-4/">dodgey ball devlog 4</a>
+            
+        </li>
+        <li>
+            Next:
+            
+                <a href="/blog/dodgey-ball-6/">dodgey ball devlog 6</a>
+            
+        </li>
+    </ol>
+</nav>
+        </div>
+    </body>
+</html>

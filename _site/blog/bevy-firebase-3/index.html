@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+    <script>
+        document.querySelector("html").setAttribute("data-theme", localStorage.getItem("theme") || "light");
+    </script>
+    <head>
+        <link
+        rel="stylesheet" href="/assets/css/styles.css"> <!-- eleventy-plugin-metagen --><meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>emulating firebase - bytemunch.dev</title>
+	<meta name="author" content="Sam Edelsten">
+	<meta name="title" content="emulating firebase - bytemunch.dev">
+	<meta name="description" content="pointing my bevy plugin at local emulators in preparation for tests">
+	<meta name="generator" content="eleventy">
+	<!-- Open Graph -->
+	<meta property="og:type" content="website">
+	<meta property="og:url" content="https://bytemunch.dev/blog/bevy-firebase-3/">
+	<meta property="og:locale" content="en_US">
+	<meta property="og:title" content="emulating firebase - bytemunch.dev">
+	<meta property="og:description" content="pointing my bevy plugin at local emulators in preparation for tests">
+	<meta property="og:image" content="/projects/bevy-firebase/img/thumb.png">
+	<meta property="og:image:alt" content="badly hand drawn firebase logo next to a firebase-coloured badly drawn bevy logo on a white circle">
+	<!-- Twitter -->
+	<meta name="twitter:card" content="summary_large_image">
+	<meta name="twitter:site" content="@bytemunch">
+	<meta name="twitter:creator" content="@bytemunch">
+	<meta name="twitter:url" content="https://bytemunch.dev/blog/bevy-firebase-3/">
+	<meta name="twitter:title" content="emulating firebase - bytemunch.dev">
+	<meta name="twitter:description" content="pointing my bevy plugin at local emulators in preparation for tests">
+	<meta name="twitter:image" content="/projects/bevy-firebase/img/thumb.png">
+	<meta name="twitter:image:alt" content="badly hand drawn firebase logo next to a firebase-coloured badly drawn bevy logo on a white circle">
+	<link rel="canonical" href="https://bytemunch.dev/blog/bevy-firebase-3/">
+    </head>
+    <body>
+        <div id="main">
+            <div class="title">
+                <h1>
+                    <a href="/">bytemunch<span class="title-secondary">dot</span>dev</a><a href="/blog" class="title-location">
+                            <span class="title-secondary">slash</span>blog</a></h1>
+                <p
+                    id="theme-switch"
+                    href="javascript:void(0)"
+                    onclick=" let theme = localStorage.getItem('theme') || 'light'; document.querySelector('#theme-switch').textContent =
+                        theme; theme = theme == 'light' ? 'dark' : 'light'; localStorage.setItem('theme',theme);
+                        document.querySelector('html').setAttribute('data-theme',theme); ">
+                    theme toggle</p>
+                <script>
+                    let theme = localStorage.getItem('theme') || 'light';
+                    document.querySelector('#theme-switch').textContent = theme == 'light'
+                        ? 'dark'
+                        : 'light';
+                </script>
+            </div>
+            
+
+
+<nav>
+    <ol class='post-paginate'>
+        <li>
+            Previous:
+            
+                <a href="/blog/bevy-firebase-2/">bevy-firebase in action</a>
+            
+        </li>
+        <li>
+            Next:
+            
+                <a href="/blog/bevy-firebase-4/">releasing bevy-firebase!</a>
+            
+        </li>
+    </ol>
+</nav>
+<div id="post-header">
+    <h1>emulating firebase</h1>
+    <p>pointing my bevy plugin at local emulators in preparation for tests</p>
+    <p class="date">20/07/2023</p>
+</div>
+<div id="post">
+    <h2>Bevy 0.11.0</h2>
+<p>A new <a href="https://bevyengine.org/news/bevy-0-11/">Bevy update</a> is out...</p>
+<p>...my plugin requires migration...</p>
+<p>...but the <a href="https://bevyengine.org/learn/migration-guides/0.10-0.11/">migration guide</a> is comprehensive and easy to follow!</p>
+<hr>
+<h2>Back to business</h2>
+<p>Now that I'm up to date, time to get back to adding features. First off, I want to get the leaderboard in the click game example up and running, and I get the feeling this will require a structured query. Excuse me while I jump back into the docs.</p>
+<hr>
+<p>Implementing that was simple enough. I'm liking using the Event system for calling and responding to Firestore calls, but it's a LOT of repeated code. I'm making a mental note to see if macros can reduce some of the footprint; Tantan's <a href="https://www.youtube.com/watch?v=ModFC1bhobA">video</a> has inspired a deep dive into the world of meta-programming. But for now, there are simpler things to do.</p>
+<h2>Name Input</h2>
+<p>The click game has a <code>set name</code> button, but no text input. Let's add one.</p>
+<video controls>
+<source src="/blog/img/bevy-firebase/text_input.webm" type="video/webm">
+</video>
+<p>Cool, that works. Let's never do that again though, egui is getting learned next time I need text input.</p>
+<h2>Emulate Everything</h2>
+<p>I've been working with a test project on Firebase whilst getting the plugin working, but running tests against a live database sounds like a terrible idea. Firebase provides <a href="https://firebase.google.com/docs/emulator-suite">emulators</a> for a lot of the APIs I'm trying to interface with, so let's get set up with them. Firestore already works, but Auth is all live right now.</p>
+<h3>Finding Endpoints</h3>
+<p>Google's <a href="https://firebase.google.com/docs/reference/rest/auth#section-auth-emulator">docs</a> mention REST endpoints for the auth emulator, but only provide like four? There are a whole lot of extra endpoints I'll need to emulate to be able to test effectively.</p>
+<hr>
+<p>After a bit of digging I loaded up the emulator URL in a browser, and was greeted with this:</p>
+<pre><code class="language-json">{
+  &quot;authEmulator&quot;: {
+    &quot;ready&quot;: true,
+    &quot;docs&quot;: &quot;https://firebase.google.com/docs/emulator-suite&quot;,
+    &quot;apiSpec&quot;: &quot;/emulator/openapi.json&quot;
+  }
+}
+</code></pre>
+<p>Okay, so what's in the apiSpec path of the emulator? It's the whole spec. Every endpoint, listed in JSON. Excellent. Now I can start testing. I'll add an <code>EmulatorUrl</code> option to the plugin like the firestore one, and try signing in. I have a feeling that starting with oAuth2 is gonna bite me here, but let's give it a go anyway.</p>
+<p><code>CODE 501: The Auth Emulator only support sign-in with google.com using id_token, not access_token. Please update your code to use id_token.</code></p>
+<p>Okay, but it beats the errors I was getting before. <code>404</code> from guessing endpoints, and <code>400</code> by sending <code>String(&quot;true&quot;)</code> as a bool. Works in production, the emulator wants an actual JSON bool.</p>
+<p>After switching to using <code>id_token</code>, I've successfully logged in to the emulator using Google oAuth!</p>
+<h2>More Signin Providers</h2>
+<p>I want to allow for the freedom of using all sign-in providers with the plugin. After some reading, it seems I'll need a separate <code>Client Secret</code> and <code>Client ID</code> for each provider. A quick rewrite of the auth plugin is in order if I am to facilitate other providers than Google. That's not to mention email/password login, and perhaps anonymous &quot;login&quot; for warm onboarding.</p>
+<p>This would be a breaking change if I had released already. Luckily I haven't :P</p>
+<hr>
+<p>After a whole day of refactoring, then refactoring the refactoring to make it sensible, I've come away with working Github login.</p>
+<video controls>
+<source src="/blog/img/bevy-firebase/github-login.mp4" type="video/mp4">
+</video>
+<hr>
+<p>That's enough for this post I guess, as it's now a month later and I still haven't published this oooopsie! See you in the next one.</p>
+
+</div>
+
+
+<nav>
+    <ol class='post-paginate'>
+        <li>
+            Previous:
+            
+                <a href="/blog/bevy-firebase-2/">bevy-firebase in action</a>
+            
+        </li>
+        <li>
+            Next:
+            
+                <a href="/blog/bevy-firebase-4/">releasing bevy-firebase!</a>
+            
+        </li>
+    </ol>
+</nav>
+        </div>
+    </body>
+</html>

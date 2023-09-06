@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+    <script>
+        document.querySelector("html").setAttribute("data-theme", localStorage.getItem("theme") || "light");
+    </script>
+    <head>
+        <link
+        rel="stylesheet" href="/assets/css/styles.css"> <!-- eleventy-plugin-metagen --><meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>head meet wall - bytemunch.dev</title>
+	<meta name="author" content="Sam Edelsten">
+	<meta name="title" content="head meet wall - bytemunch.dev">
+	<meta name="description" content="man loses mind ft. firestore + gRPC">
+	<meta name="generator" content="eleventy">
+	<!-- Open Graph -->
+	<meta property="og:type" content="website">
+	<meta property="og:url" content="https://bytemunch.dev/blog/dodgeball-2/">
+	<meta property="og:locale" content="en_US">
+	<meta property="og:title" content="head meet wall - bytemunch.dev">
+	<meta property="og:description" content="man loses mind ft. firestore + gRPC">
+	<meta property="og:image" content="/projects/dodgeball/img/thumb.png">
+	<meta property="og:image:alt" content="a dodgeball with an explosion of shrapnel behind it
+">
+	<!-- Twitter -->
+	<meta name="twitter:card" content="summary_large_image">
+	<meta name="twitter:site" content="@bytemunch">
+	<meta name="twitter:creator" content="@bytemunch">
+	<meta name="twitter:url" content="https://bytemunch.dev/blog/dodgeball-2/">
+	<meta name="twitter:title" content="head meet wall - bytemunch.dev">
+	<meta name="twitter:description" content="man loses mind ft. firestore + gRPC">
+	<meta name="twitter:image" content="/projects/dodgeball/img/thumb.png">
+	<meta name="twitter:image:alt" content="a dodgeball with an explosion of shrapnel behind it
+">
+	<link rel="canonical" href="https://bytemunch.dev/blog/dodgeball-2/">
+    </head>
+    <body>
+        <div id="main">
+            <div class="title">
+                <h1>
+                    <a href="/">bytemunch<span class="title-secondary">dot</span>dev</a><a href="/blog" class="title-location">
+                            <span class="title-secondary">slash</span>blog</a></h1>
+                <p
+                    id="theme-switch"
+                    href="javascript:void(0)"
+                    onclick=" let theme = localStorage.getItem('theme') || 'light'; document.querySelector('#theme-switch').textContent =
+                        theme; theme = theme == 'light' ? 'dark' : 'light'; localStorage.setItem('theme',theme);
+                        document.querySelector('html').setAttribute('data-theme',theme); ">
+                    theme toggle</p>
+                <script>
+                    let theme = localStorage.getItem('theme') || 'light';
+                    document.querySelector('#theme-switch').textContent = theme == 'light'
+                        ? 'dark'
+                        : 'light';
+                </script>
+            </div>
+            
+
+
+<nav>
+    <ol class='post-paginate'>
+        <li>
+            Previous:
+            
+                <a href="/blog/site-update-0/">website refresh</a>
+            
+        </li>
+        <li>
+            Next:
+            
+                <a href="/blog/dodgeball-3/">gRPC authenticated</a>
+            
+        </li>
+    </ol>
+</nav>
+<div id="post-header">
+    <h1>head meet wall</h1>
+    <p>man loses mind ft. firestore + gRPC</p>
+    <p class="date">01/06/2023</p>
+</div>
+<div id="post">
+    <h2>thoughtstream</h2>
+<p>Let's start checking off the list of CRUD operations. Last update we got reading data working, so only three operations to go! I'll start by putting the read system into it's own function.</p>
+<p>Ah, I'm rusty <sub>haha</sub> and just spent half an hour fighting the borrow checker.</p>
+<p>After a little research into using serde with firestore, I've found a wealth of crates that do what I'm trying to accomplish! Unfortunately they all seem to work with service accounts in mind, and I need per-user granularity for the firestore rules to work as planned.</p>
+<p>I'll have a play with <a href="https://github.com/mechiru/googapis">googapis</a> and see if my current auth tokens will work? <s>Nope, service account focused.</s> Turns out the project targets old tonic.</p>
+<p>I've also learned that REST is old hat now, and I should use gRPC instead. <a href="https://github.com/hyperium/tonic">Tonic</a> is apparently the way forward.</p>
+<p>Once I've got my head around all this I should be ready to utilise <a href="https://crates.io/crates/firestore-serde">firestore-serde</a>, and my JSON parsing nightmares should cease.</p>
+<p><sub>several hours of documentation reading later...</sub></p>
+<p>I feel like I'm struggling so much with the auth side of the API because of foundational gaps in my knowledge when it comes to HTTP requests and RPC.</p>
+<p>Okay so nah fuck all that noise, I'm going to see if the <a href="https://crates.io/crates/firestore">firestore</a> crate will accept a JWT, as I already have access to that token.</p>
+<p>Passing my token as credentials with that crate didn't work. I'm just going to roll my own for now.</p>
+<p>So new plan: auth using REST and then firestore over RPC, as the REST API has no listening ability, and I would like the lobby browser to auto update. Polling sounds both expensive and cumbersome.</p>
+<p>Rolling my own signalling server is looking more and more appealing, but I really don't want to deal with user authentication. And I'd probably need to learn RPC for that anyway.</p>
+<p>I'll try this all again tomorrow, I need to let all the reading sink in.</p>
+<p>Target for next update is an authenticated RPC request to firestore.</p>
+
+</div>
+
+
+<nav>
+    <ol class='post-paginate'>
+        <li>
+            Previous:
+            
+                <a href="/blog/site-update-0/">website refresh</a>
+            
+        </li>
+        <li>
+            Next:
+            
+                <a href="/blog/dodgeball-3/">gRPC authenticated</a>
+            
+        </li>
+    </ol>
+</nav>
+        </div>
+    </body>
+</html>

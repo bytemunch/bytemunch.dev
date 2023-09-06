@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+    <script>
+        document.querySelector("html").setAttribute("data-theme", localStorage.getItem("theme") || "light");
+    </script>
+    <head>
+        <link
+        rel="stylesheet" href="/assets/css/styles.css"> <!-- eleventy-plugin-metagen --><meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>gRPC authenticated - bytemunch.dev</title>
+	<meta name="author" content="Sam Edelsten">
+	<meta name="title" content="gRPC authenticated - bytemunch.dev">
+	<meta name="description" content="implementing firestore gRPC services in rust">
+	<meta name="generator" content="eleventy">
+	<!-- Open Graph -->
+	<meta property="og:type" content="website">
+	<meta property="og:url" content="https://bytemunch.dev/blog/dodgeball-3/">
+	<meta property="og:locale" content="en_US">
+	<meta property="og:title" content="gRPC authenticated - bytemunch.dev">
+	<meta property="og:description" content="implementing firestore gRPC services in rust">
+	<meta property="og:image" content="/projects/dodgeball/img/thumb.png">
+	<meta property="og:image:alt" content="a dodgeball with an explosion of shrapnel behind it
+">
+	<!-- Twitter -->
+	<meta name="twitter:card" content="summary_large_image">
+	<meta name="twitter:site" content="@bytemunch">
+	<meta name="twitter:creator" content="@bytemunch">
+	<meta name="twitter:url" content="https://bytemunch.dev/blog/dodgeball-3/">
+	<meta name="twitter:title" content="gRPC authenticated - bytemunch.dev">
+	<meta name="twitter:description" content="implementing firestore gRPC services in rust">
+	<meta name="twitter:image" content="/projects/dodgeball/img/thumb.png">
+	<meta name="twitter:image:alt" content="a dodgeball with an explosion of shrapnel behind it
+">
+	<link rel="canonical" href="https://bytemunch.dev/blog/dodgeball-3/">
+    </head>
+    <body>
+        <div id="main">
+            <div class="title">
+                <h1>
+                    <a href="/">bytemunch<span class="title-secondary">dot</span>dev</a><a href="/blog" class="title-location">
+                            <span class="title-secondary">slash</span>blog</a></h1>
+                <p
+                    id="theme-switch"
+                    href="javascript:void(0)"
+                    onclick=" let theme = localStorage.getItem('theme') || 'light'; document.querySelector('#theme-switch').textContent =
+                        theme; theme = theme == 'light' ? 'dark' : 'light'; localStorage.setItem('theme',theme);
+                        document.querySelector('html').setAttribute('data-theme',theme); ">
+                    theme toggle</p>
+                <script>
+                    let theme = localStorage.getItem('theme') || 'light';
+                    document.querySelector('#theme-switch').textContent = theme == 'light'
+                        ? 'dark'
+                        : 'light';
+                </script>
+            </div>
+            
+
+
+<nav>
+    <ol class='post-paginate'>
+        <li>
+            Previous:
+            
+                <a href="/blog/dodgeball-2/">head meet wall</a>
+            
+        </li>
+        <li>
+            Next:
+            
+                <a href="/blog/dodgeball-4/">Firestore rules</a>
+            
+        </li>
+    </ol>
+</nav>
+<div id="post-header">
+    <h1>gRPC authenticated</h1>
+    <p>implementing firestore gRPC services in rust</p>
+    <p class="date">05/06/2023</p>
+</div>
+<div id="post">
+    <h2>Let's gRPC</h2>
+<p>First off I need to be able to get my oAuth tokens out of the redirect server listener I made <a href="/blog/dodgeball-1">before</a>.</p>
+<p>Set redirect server to only allow one connection, synchronous networking? Yup. Now I can move all the oAuth stuff to it's own function, ready to be plugged in to other functions.</p>
+<p>Now I have a function I can call that requests web login and returns a firebase token, we can start looking at gRPC requests.</p>
+<p>To begin with gRPC, I'll need a gRPC client. Let's learn <a href="https://github.com/hyperium/tonic">tonic</a>.</p>
+<p>I've spent more than a few hours looking for generated protobufs, but nothing seems to be working. I'll assume they're not updated to latest tonic yet, and start looking into tonic-build.</p>
+<p>I knew I'd barely scratched the surface. Fun times.</p>
+<p><sub>i am losing my miiiiiiiind</sub></p>
+<h2>progress, finally</h2>
+<p><sub>it's been three days</sub></p>
+<p>I bit the bullet and learned how tonic-build works, fed it the <a href="">googleapis</a> and got some working rust bindings.</p>
+<p>Then I had a fun time debugging for an hour. I forgot to add a collection ID to my gRPC request. Fun hour.</p>
+<p>But at long last, user facing sign in, no auth scopes required. Once the firebase rules and user creation flows are up and running this code will be the foundation for cloud based bits. I still need to figure out refreshing my tokens, but this should be a good base.</p>
+<p>I've extracted client creation to a function:</p>
+<pre><code class="language-rust">async fn create_firestore_client(
+    token: String,
+) -&gt; Result&lt;
+    FirestoreClient&lt;
+        InterceptedService&lt;
+            Channel,
+            impl Fn(Request&lt;()&gt;) -&gt; Result&lt;Request&lt;()&gt;, Status&gt;,
+            // i have no clue how this type annotation works :)
+        &gt;,
+    &gt;,
+    Box&lt;dyn Error&gt;,
+&gt; {
+    let bearer_token = format!(&quot;Bearer {}&quot;, token);
+    let header_value: MetadataValue&lt;_&gt; = bearer_token.parse()?;
+
+    let data_dir = PathBuf::from_iter([std::env!(&quot;CARGO_MANIFEST_DIR&quot;), &quot;data&quot;]);
+    let certs = read_to_string(data_dir.join(&quot;gcp/gtsr1.pem&quot;))?;
+
+    let tls_config = ClientTlsConfig::new()
+        .ca_certificate(Certificate::from_pem(certs))
+        .domain_name(&quot;firestore.googleapis.com&quot;);
+
+    let channel = Channel::from_static(ENDPOINT)
+        .tls_config(tls_config)?
+        .connect()
+        .await?;
+
+    let service = FirestoreClient::with_interceptor(channel, move |mut req: Request&lt;()&gt;| {
+        req.metadata_mut()
+            .insert(&quot;authorization&quot;, header_value.clone());
+        Ok(req)
+    });
+
+    return Ok(service);
+}
+</code></pre>
+<p>Getting documents is now as simple as this:</p>
+<pre><code class="language-rust">let response: Response&lt;Document&gt; = service
+    .get_document(Request::new(GetDocumentRequest {
+        name: format!(
+            &quot;projects/{PROJECT_ID}/databases/{DATABASE_ID}/documents/{document_path}&quot;
+        ),
+        ..Default::default()
+    }))
+    .await?;
+
+println!(&quot;Response: {:?}\n&quot;, response);
+</code></pre>
+<p>With that, I have caught back up to how far I got with the REST api.</p>
+<p>Now I need to figure out some firestore rules and data structures before trying to write data.</p>
+
+</div>
+
+
+<nav>
+    <ol class='post-paginate'>
+        <li>
+            Previous:
+            
+                <a href="/blog/dodgeball-2/">head meet wall</a>
+            
+        </li>
+        <li>
+            Next:
+            
+                <a href="/blog/dodgeball-4/">Firestore rules</a>
+            
+        </li>
+    </ol>
+</nav>
+        </div>
+    </body>
+</html>

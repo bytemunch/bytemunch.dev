@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+    <script>
+        document.querySelector("html").setAttribute("data-theme", localStorage.getItem("theme") || "light");
+    </script>
+    <head>
+        <link
+        rel="stylesheet" href="/assets/css/styles.css"> <!-- eleventy-plugin-metagen --><meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>drink - bytemunch.dev</title>
+	<meta name="author" content="Sam Edelsten">
+	<meta name="title" content="drink - bytemunch.dev">
+	<meta name="description" content="a multiplayer realtime drinking game app.">
+	<meta name="generator" content="eleventy">
+	<!-- Open Graph -->
+	<meta property="og:type" content="website">
+	<meta property="og:url" content="https://bytemunch.dev/projects/drink/">
+	<meta property="og:locale" content="en_US">
+	<meta property="og:title" content="drink - bytemunch.dev">
+	<meta property="og:description" content="a multiplayer realtime drinking game app.">
+	<meta property="og:image" content="/projects/drink/img/thumb.png">
+	<meta property="og:image:alt" content="a white cursive lowercase D on a light blue background">
+	<!-- Twitter -->
+	<meta name="twitter:card" content="summary_large_image">
+	<meta name="twitter:site" content="@bytemunch">
+	<meta name="twitter:creator" content="@bytemunch">
+	<meta name="twitter:url" content="https://bytemunch.dev/projects/drink/">
+	<meta name="twitter:title" content="drink - bytemunch.dev">
+	<meta name="twitter:description" content="a multiplayer realtime drinking game app.">
+	<meta name="twitter:image" content="/projects/drink/img/thumb.png">
+	<meta name="twitter:image:alt" content="a white cursive lowercase D on a light blue background">
+	<link rel="canonical" href="https://bytemunch.dev/projects/drink/">
+    </head>
+    <body>
+        <div id="main">
+            <div class="title">
+                <h1>
+                    <a href="/">bytemunch<span class="title-secondary">dot</span>dev</a><a href="/projects" class="title-location">
+                            <span class="title-secondary">slash</span>projects</a></h1>
+                <p
+                    id="theme-switch"
+                    href="javascript:void(0)"
+                    onclick=" let theme = localStorage.getItem('theme') || 'light'; document.querySelector('#theme-switch').textContent =
+                        theme; theme = theme == 'light' ? 'dark' : 'light'; localStorage.setItem('theme',theme);
+                        document.querySelector('html').setAttribute('data-theme',theme); ">
+                    theme toggle</p>
+                <script>
+                    let theme = localStorage.getItem('theme') || 'light';
+                    document.querySelector('#theme-switch').textContent = theme == 'light'
+                        ? 'dark'
+                        : 'light';
+                </script>
+            </div>
+            
+<div class="project-header">
+    <a href="https://ring-of-fire-5d1a4.web.app/" target="_blank">
+    <h1>drink</h1>
+    </a>
+    <p>a multiplayer realtime drinking game app.</p>
+    <img src="./img/thumb.png" alt="drink thumbnail" class="thumb "/>
+</div>
+<h2>what's this?</h2>
+<p>a realtime online multiplayer drinking game. sounded like a great idea when i still played drinking games, but turns out drinking and coding don't go well for me. i'm still proud of what i accomplished with it. the project mainly died due to me getting caught up on keeping track of user presence, and how to handle connection drops and the like. netcode stuff.</p>
+<p>unfortunately the web has evolved again now and broken the app's online component.</p>
+<p>the app was a PWA, used firebase for everything. designed for mobile viewing.</p>
+
+<div class="links project-page">
+    
+        <a href="https://ring-of-fire-5d1a4.web.app/" target="_blank">view</a>
+        |
+    
+    
+        <a href="https://github.com/bytemunch/drink" target="_blank">repo</a>
+    
+    
+</div>
+        </div>
+    </body>
+</html>

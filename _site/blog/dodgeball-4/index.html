@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+    <script>
+        document.querySelector("html").setAttribute("data-theme", localStorage.getItem("theme") || "light");
+    </script>
+    <head>
+        <link
+        rel="stylesheet" href="/assets/css/styles.css"> <!-- eleventy-plugin-metagen --><meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Firestore rules - bytemunch.dev</title>
+	<meta name="author" content="Sam Edelsten">
+	<meta name="title" content="Firestore rules - bytemunch.dev">
+	<meta name="description" content="designing data structure and deploying rules for the dodgeball game's backend">
+	<meta name="generator" content="eleventy">
+	<!-- Open Graph -->
+	<meta property="og:type" content="website">
+	<meta property="og:url" content="https://bytemunch.dev/blog/dodgeball-4/">
+	<meta property="og:locale" content="en_US">
+	<meta property="og:title" content="Firestore rules - bytemunch.dev">
+	<meta property="og:description" content="designing data structure and deploying rules for the dodgeball game's backend">
+	<meta property="og:image" content="/projects/dodgeball/img/thumb.png">
+	<meta property="og:image:alt" content="a dodgeball with an explosion of shrapnel behind it
+">
+	<!-- Twitter -->
+	<meta name="twitter:card" content="summary_large_image">
+	<meta name="twitter:site" content="@bytemunch">
+	<meta name="twitter:creator" content="@bytemunch">
+	<meta name="twitter:url" content="https://bytemunch.dev/blog/dodgeball-4/">
+	<meta name="twitter:title" content="Firestore rules - bytemunch.dev">
+	<meta name="twitter:description" content="designing data structure and deploying rules for the dodgeball game's backend">
+	<meta name="twitter:image" content="/projects/dodgeball/img/thumb.png">
+	<meta name="twitter:image:alt" content="a dodgeball with an explosion of shrapnel behind it
+">
+	<link rel="canonical" href="https://bytemunch.dev/blog/dodgeball-4/">
+    </head>
+    <body>
+        <div id="main">
+            <div class="title">
+                <h1>
+                    <a href="/">bytemunch<span class="title-secondary">dot</span>dev</a><a href="/blog" class="title-location">
+                            <span class="title-secondary">slash</span>blog</a></h1>
+                <p
+                    id="theme-switch"
+                    href="javascript:void(0)"
+                    onclick=" let theme = localStorage.getItem('theme') || 'light'; document.querySelector('#theme-switch').textContent =
+                        theme; theme = theme == 'light' ? 'dark' : 'light'; localStorage.setItem('theme',theme);
+                        document.querySelector('html').setAttribute('data-theme',theme); ">
+                    theme toggle</p>
+                <script>
+                    let theme = localStorage.getItem('theme') || 'light';
+                    document.querySelector('#theme-switch').textContent = theme == 'light'
+                        ? 'dark'
+                        : 'light';
+                </script>
+            </div>
+            
+
+
+<nav>
+    <ol class='post-paginate'>
+        <li>
+            Previous:
+            
+                <a href="/blog/dodgeball-3/">gRPC authenticated</a>
+            
+        </li>
+        <li>
+            Next:
+            
+                <a href="/blog/bevy-firebase-0/">Bevy + Firebase</a>
+            
+        </li>
+    </ol>
+</nav>
+<div id="post-header">
+    <h1>Firestore rules</h1>
+    <p>designing data structure and deploying rules for the dodgeball game&#39;s backend</p>
+    <p class="date">06/06/2023</p>
+</div>
+<div id="post">
+    <h2>Designing data structures</h2>
+<p>Firestore stores documents, which contain fields, which hold values. Documents live in collections. Documents can hold sub-collections, but not other documents.</p>
+<p>I've been using Firestore a fair amount over the last few years, so I should be able to design my data structures with this in mind, right? ...riiight?</p>
+<p>I'll need to store data with many different access rights. Lobbies will need to be publicly viewable (at lobby creator's discretion), and only editable in conjunction with the correct password, which is stored in a user's private settings. I hope to hack around with data validation workflows for lobby password authentication in order to save me from needing cloud functions.</p>
+<p>Here's some scribbles: <sub>(forgive my handwriting)</sub></p>
+<blockquote>
+<p><img src="/blog/img/dodgeball/users_collection.png" alt="user collection">
+First design for users collection</p>
+</blockquote>
+<blockquote>
+<p><img src="/blog/img/dodgeball/lobby_scribbles.png" alt="lobby scribbles">
+First design for lobby collection</p>
+</blockquote>
+<p>You can see in these examples where the Collection/Document/Collection layout makes a bit of a mess. I despise useless names for things, like a document called 'Data', but I can't think of any better name, it stores a broad range of data.</p>
+<p>I also cannot have a collection for RoomSettings, that'll need a document under it. RoomSettings will be publicly viewable.</p>
+<p><sub>i think i need a spreadsheet for all the access rights</sub></p>
+<blockquote>
+<p><img src="/blog/img/dodgeball/firestore_permissions.png" alt="spreadsheet detailing firestore permissions">
+Conditional formatting was probably a bit extra.</p>
+</blockquote>
+<p>Once I've started to write the rules I've noticed <code>.../lobbySettings/settings</code> is superfluous, I can just use the <code>/lobbies/{ownerId}</code> document to hold the lobby settings.</p>
+<p>Speaking of those rules, this is where I'm at now:</p>
+<pre><code class="language-rs">rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+  
+    function isAuthed() {
+      return request.auth != null;
+    }
+
+    function isUser(userId) {
+      return request.auth.uid == userId;
+    }
+
+    function checkLobbyPassword(lobbyId) {
+      return request.resource.data.password == get(/databases/
+      $(database)/documents/users/$(lobbyId)/private/data).data.lobbyPassword;
+    }
+
+    function userInLobby(userId, lobbyId) {
+      return exists(/databases/(default)/documents/lobbies/
+      $(lobbyId)/connectedUsers/$(userId));
+    }
+    
+    function userBanned(userId, lobbyId) {
+      return exists(/databases/(default)/documents/lobbies/
+      $(lobbyId)/bannedUsers/$(userId))
+    }
+    
+    // user data
+    match /users/{userId} {
+      match /public/{document=**} {
+      	allow read: if isAuthed();
+        allow write: if isUser(userId);
+      }
+      match /private/{document=**} {
+      	allow read, write: if isUser(userId);
+      }
+    }
+    
+    // lobbies
+    match /lobbies/{ownerId} {
+      allow read: if isAuthed();
+      allow write: if isUser(ownerId);
+      
+      match /connectedUsers {
+      	allow list: if userInLobby(request.auth.uid, ownerId);
+        allow read, write: if isUser(ownerId);
+        
+        match /{document=**} {
+          allow read: if userInLobby(request.auth.uid, ownerId);
+        }
+        
+        match /{userId} {
+          allow write: if checkLobbyPassword(ownerId) &amp;&amp; 
+          isUser(userId) &amp;&amp; !userBanned(userId, ownerId);
+          allow read, write: if isUser(ownerId);
+        }
+      }
+      
+      match /bannedUsers/{document=**} {
+      	allow read, write: if isUser(ownerId);
+      }
+    }
+  }
+}
+</code></pre>
+<p>After testing these rules with the firestore playground, I'm fairly confident it won't leak lobby passwords. I'll need to add rate limiting to prevent brute-forcing, but this will do for now.</p>
+<p>Refreshing tokens is next on the cards, as currently a login will only last an hour.</p>
+
+</div>
+
+
+<nav>
+    <ol class='post-paginate'>
+        <li>
+            Previous:
+            
+                <a href="/blog/dodgeball-3/">gRPC authenticated</a>
+            
+        </li>
+        <li>
+            Next:
+            
+                <a href="/blog/bevy-firebase-0/">Bevy + Firebase</a>
+            
+        </li>
+    </ol>
+</nav>
+        </div>
+    </body>
+</html>

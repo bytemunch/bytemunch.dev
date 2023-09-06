@@ -1,0 +1,390 @@
+* {
+    box-sizing: border-box;
+}
+
+:root {
+    --background-color: #ffffff;
+    --text-color: #555;
+    --text-color-light: #aaa;
+    --text-color-dark: #111;
+    --link-color: #2e2eff;
+    --link-color-visited: #8731A0;
+    --border-color: #555;
+    --border-color-dark: #111;
+    --border-color-light: #aaa;
+}
+
+:root[data-theme='dark'] {
+    --background-color: #212121;
+    --text-color: #aaa;
+    --text-color-light: #666;
+    --text-color-dark: #eee;
+    --link-color: #8888ff;
+    --link-color-visited: #C4A0DA;
+    --border-color: #aaa;
+    --border-color-dark: #eee;
+    --border-color-light: #666;
+}
+
+html {
+    color: var(--text-color);
+    background-color: var(--background-color);
+    font-family: 'Courier New', Courier, monospace;
+}
+
+body {
+    margin: 0;
+    scrollbar-width: 0px;
+    overflow-x: hidden;
+    position: relative;
+}
+
+body::-webkit-scrollbar {
+    display: none;
+}
+
+#main {
+    max-width: 812px;
+    min-height: 100vh;
+    padding: 5px;
+    margin: auto;
+    border-left: 1px dashed var(--border-color-dark);
+    border-right: 1px dashed var(--border-color-dark);
+    overflow-x: hidden;
+    position: relative;
+}
+
+img {
+    max-width: 100%;
+}
+
+a {
+    color: var(--link-color);
+    text-decoration: none;
+}
+
+p {
+    margin-top: 0;
+}
+
+h2 {
+    display: inline-block;
+    margin-top: 0.5em;
+    margin-bottom: 0em;
+}
+
+h2 {
+    clear: both;
+}
+
+a:visited {
+    color: var(--link-color-visited);
+}
+
+a:hover {
+    color: var(--text-color-dark);
+}
+
+.title {
+    border-bottom: 1px dashed var(--border-color-dark);
+    padding-bottom: 0.5em;
+    margin-bottom: 0.5em;
+}
+
+#theme-switch {
+    position: absolute;
+    top: 0.5em;
+    right: 0.5em;
+    cursor: pointer;
+    user-select: none;
+}
+
+#theme-switch:hover {
+    color: var(--text-color-dark);
+}
+
+h2 a,
+.title a,
+.title a:visited,
+.title {
+    color: var(--text-color);
+}
+
+.title-secondary {
+    color: var(--text-color-light);
+}
+
+.title-location {
+    margin-left: -0.6em;
+}
+
+h2 a:hover,
+.title a:hover,
+#funding h2:hover {
+    color: var(--text-color-dark);
+}
+
+.title a:hover .title-secondary {
+    color: var(--text-color);
+}
+
+#funding {
+    margin-top: 1em;
+}
+
+#funding.closed {
+    height: 1.6em;
+    overflow: hidden;
+    margin-bottom: 1em;
+}
+
+#funding h2 {
+    margin-top: 0;
+    cursor: pointer;
+    color: var(--link-color);
+}
+
+.post-link,
+.project-card {
+    border: 3px double var(--border-color-light);
+    margin: 3px;
+    overflow: hidden;
+    display: flex;
+    background: var(--background-color);
+}
+
+.post-link:hover,
+.project-card:hover {
+    transform: scale(1.05);
+    border-color: var(--border-color);
+}
+
+#projects {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.project-card {
+    height: 16em;
+    justify-content: center;
+    flex-wrap: wrap;
+    text-align: center;
+    width: 260px;
+}
+
+.project-card .info {
+    border-bottom: 1px dashed var(--border-color-dark);
+    height: 128px;
+}
+
+.project-card .info p {
+    margin: 0;
+}
+
+.project-card .links {
+    height: 22px;
+}
+
+.project-card a .thumbnail {
+    display: flex;
+    justify-content: center;
+    height: 96px;
+}
+
+.project-card .thumbnail img {
+    height: 96px;
+}
+
+.post-link {
+    margin: 5px 2.5%;
+    max-height: 6em;
+    position: relative;
+}
+
+.post-link .thumbnail {
+    flex-basis: 90px;
+    flex-grow: 0;
+    flex-shrink: 0;
+}
+
+.post-link .thumbnail img {
+    width: 5em;
+}
+
+.post-link .date {
+    position: absolute;
+    top: 0em;
+    right: 0.2em;
+    font-size: 1em;
+}
+
+.links.project-page {
+    text-align: center;
+    border-top: 1px dashed var(--border-color-dark);
+    border-bottom: 1px dashed var(--border-color-dark);
+    padding-top: 8px;
+    padding-bottom: 8px;
+}
+
+#post-header {
+    border-bottom: 1px dashed var(--border-color-dark);
+    position: relative;
+}
+
+#post-header .date {
+    position: absolute;
+    top: -1em;
+    right: 0.5em;
+}
+
+#post {
+    border-bottom: 1px dashed var(--border-color-dark);
+    padding-top: 1em;
+}
+
+#post img,
+#post * img,
+#post * * img {
+    max-width: 100%;
+    max-height: 400px;
+    margin: auto;
+    display: block;
+    border: 1px solid grey;
+}
+
+blockquote {
+    background-color: #00000022;
+    padding: 4px;
+}
+
+.links {
+    user-select: none;
+}
+
+.see-more {
+    display: block;
+    padding-left: 2em;
+    padding-top: 0.5em;
+}
+
+/* pagination */
+
+ol {
+    list-style: none;
+    display: flex;
+    justify-content: space-evenly;
+    padding: 0;
+}
+
+.post-paginate {
+    justify-content: space-between;
+    padding: 0;
+    padding-bottom: 16px;
+    border-bottom: 1px dashed var(--border-color-dark);
+}
+
+li {
+    display: inline;
+}
+
+/* project */
+
+.project-header {
+    display: grid;
+    width: 100%;
+    justify-content: space-between;
+    padding-bottom: 16px;
+    border-bottom: 1px dashed var(--border-color-dark);
+}
+
+.project-header h1 {
+    grid-row-start: 1;
+    grid-row-end: 2;
+    grid-column-start: 1;
+    grid-column-end: 2;
+}
+
+.project-header p {
+    grid-row-start: 2;
+    grid-row-end: 3;
+    grid-column-start: 1;
+    grid-column-end: 2;
+}
+
+.project-header img {
+    grid-row-start: 1;
+    grid-row-end: 3;
+    grid-column-start: 2;
+    grid-column-end: 3;
+    height: 128px;
+}
+
+img.pixelated {
+    image-rendering: pixelated;
+}
+
+/* search */
+#blog-search {
+    display: flex;
+    justify-content: space-between;
+    padding: 0 5%;
+}
+
+#blog-search-form {
+    display: flex;
+}
+
+/* tag list */
+.tag-list {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    padding: 0;
+}
+
+.tag-list li {
+    display: block;
+    margin: auto 10px;
+    font-size: 1.2em;
+}
+
+/* blog */
+
+video {
+    max-width: 100%;
+}
+
+st::after,
+nd::after {
+    visibility: visible;
+    display: block;
+    overflow: visible;
+    height: 1.1em;
+    width: 100%;
+    color: var(--text-color-light);
+    border-top: 1px solid var(--border-color-light);
+    border-bottom: 1px solid var(--border-color-light);
+    text-align: center;
+}
+
+st::after {
+    content: 'some time passes';
+}
+
+nd::after {
+    content: 'a day passes';
+}
+
+#post ul {
+    padding-left: 0;
+}
+
+#post ul li {
+    margin-left: 1em;
+    display: flex;
+}
+
+#post ul li::before {
+    content: "•";
+}

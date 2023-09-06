@@ -1,7 +1,5 @@
 node_modules
-_site
 *~
-deploy.sh
 tmp
 .vscode
 mp4-webm

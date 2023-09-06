@@ -1,0 +1,395 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+    <script>
+        document.querySelector("html").setAttribute("data-theme", localStorage.getItem("theme") || "light");
+    </script>
+    <head>
+        <link
+        rel="stylesheet" href="/assets/css/styles.css"> <!-- eleventy-plugin-metagen --><meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>bevy-firebase in action - bytemunch.dev</title>
+	<meta name="author" content="Sam Edelsten">
+	<meta name="title" content="bevy-firebase in action - bytemunch.dev">
+	<meta name="description" content="pushing forward with bevy-firebase, and creating an example app">
+	<meta name="generator" content="eleventy">
+	<!-- Open Graph -->
+	<meta property="og:type" content="website">
+	<meta property="og:url" content="https://bytemunch.dev/blog/bevy-firebase-2/">
+	<meta property="og:locale" content="en_US">
+	<meta property="og:title" content="bevy-firebase in action - bytemunch.dev">
+	<meta property="og:description" content="pushing forward with bevy-firebase, and creating an example app">
+	<meta property="og:image" content="/projects/bevy-firebase/img/thumb.png">
+	<meta property="og:image:alt" content="badly hand drawn firebase logo next to a firebase-coloured badly drawn bevy logo on a white circle">
+	<!-- Twitter -->
+	<meta name="twitter:card" content="summary_large_image">
+	<meta name="twitter:site" content="@bytemunch">
+	<meta name="twitter:creator" content="@bytemunch">
+	<meta name="twitter:url" content="https://bytemunch.dev/blog/bevy-firebase-2/">
+	<meta name="twitter:title" content="bevy-firebase in action - bytemunch.dev">
+	<meta name="twitter:description" content="pushing forward with bevy-firebase, and creating an example app">
+	<meta name="twitter:image" content="/projects/bevy-firebase/img/thumb.png">
+	<meta name="twitter:image:alt" content="badly hand drawn firebase logo next to a firebase-coloured badly drawn bevy logo on a white circle">
+	<link rel="canonical" href="https://bytemunch.dev/blog/bevy-firebase-2/">
+    </head>
+    <body>
+        <div id="main">
+            <div class="title">
+                <h1>
+                    <a href="/">bytemunch<span class="title-secondary">dot</span>dev</a><a href="/blog" class="title-location">
+                            <span class="title-secondary">slash</span>blog</a></h1>
+                <p
+                    id="theme-switch"
+                    href="javascript:void(0)"
+                    onclick=" let theme = localStorage.getItem('theme') || 'light'; document.querySelector('#theme-switch').textContent =
+                        theme; theme = theme == 'light' ? 'dark' : 'light'; localStorage.setItem('theme',theme);
+                        document.querySelector('html').setAttribute('data-theme',theme); ">
+                    theme toggle</p>
+                <script>
+                    let theme = localStorage.getItem('theme') || 'light';
+                    document.querySelector('#theme-switch').textContent = theme == 'light'
+                        ? 'dark'
+                        : 'light';
+                </script>
+            </div>
+            
+
+
+<nav>
+    <ol class='post-paginate'>
+        <li>
+            Previous:
+            
+                <a href="/blog/bevy-firebase-1/">Adding firestore</a>
+            
+        </li>
+        <li>
+            Next:
+            
+                <a href="/blog/bevy-firebase-3/">emulating firebase</a>
+            
+        </li>
+    </ol>
+</nav>
+<div id="post-header">
+    <h1>bevy-firebase in action</h1>
+    <p>pushing forward with bevy-firebase, and creating an example app</p>
+    <p class="date">08/07/2023</p>
+</div>
+<div id="post">
+    <h2>Thin to Win</h2>
+<p>Before writing tests and the like, I'm going to refactor as much as I can to be as simple and error-checked as possible.</p>
+<p>I've refined the logout systems and enabled saving refresh tokens to files for easy re-logging.</p>
+<p>I've deleted all of the sync versions of the Firestore operation functions. They may return, but if they do it'll be after the async versions are feature complete and stable.</p>
+<p>Sadly <a href="https://github.com/jkb0o/pecs">pecs</a> has been removed, as much as I liked the promise flow, I now require <a href="https://docs.rs/bevy-tokio-tasks/latest/bevy_tokio_tasks/">bevy-tokio-tasks</a> and there's no need for two dependencies to achieve async behaviour.</p>
+<p>The way a user interacts with the library has been streamlined, now it exposes a <code>log_in</code> and <code>log_out</code> function that can be called on app <code>State</code> <code>OnEnter</code>, nice and simple.</p>
+<p>However while trying to simplify the listener event systems I've hit a wall. I don't know how I'd like to use the listener results in an ECS context. Perhaps it may be time to try and build something alongside plugin development so I can see how the library should be written. Now <em>that's</em> scope creep, adding a whole project? Oof.</p>
+<hr>
+<h3>Listener Events</h3>
+<p>I've finally taken the time to learn <a href="https://doc.rust-lang.org/book/ch10-01-syntax.html">generics</a>, and implemented a builder trait to allow for per-listener user defined events.</p>
+<pre><code class="language-rs">pub trait ListenerEventBuilder {
+    fn new(msg: ListenResponse) -&gt; Self;
+}
+
+pub fn add_listener&lt;T&gt;(
+    ...args
+) where
+  T: ListenerEventBuilder + std::marker::Send + std::marker::Sync + 'static,
+{
+
+  ...listener code
+
+  runtime.spawn_background_task(|mut ctx| async move {
+    while let Some(msg) = res.next().await {
+      ctx.run_on_main_thread(move |ctx| {
+        ctx.world.send_event(T::new(msg.unwrap()));
+      })
+      .await;
+    }
+  }
+}
+</code></pre>
+<blockquote>
+<p>messy stuff, but it does what I need it to.</p>
+</blockquote>
+<p>I still need to define the <code>impl ListenerEventBuilder</code> for custom events, but it's much better than sending all listener events through one channel and filtering them app-side.</p>
+<p>Creating and consuming the events now looks like this:</p>
+<pre><code class="language-rs">struct MyListenerEvent {
+    msg: ListenResponse,
+}
+
+impl ListenerEventBuilder for MyListenerEvent {
+    fn new(msg: ListenResponse) -&gt; Self {
+        MyListenerEvent { msg }
+    }
+}
+
+fn main() {
+  App::new()
+  ...plugins etc.
+  .add_event::&lt;MyListenerEvent&gt;()
+  .add_system(setup_listener.in_schedule(OnEnter(FirestoreState::Ready)))
+  .add_system(listener_system)
+  .run();
+}
+
+fn setup_listener(    
+  client: ResMut&lt;BevyFirestoreClient&gt;,
+  runtime: ResMut&lt;TokioTasksRuntime&gt;,
+  project_id: Res&lt;ProjectId&gt;,) {
+  
+  add_listener::&lt;MyListenerEvent&gt;(
+    &amp;runtime,
+    &amp;mut client,
+    project_id.clone(),
+    document_path.clone(),
+  );
+}
+
+fn test_listener_system(mut er: EventReader&lt;MyListenerEvent&gt;) {
+  for ev in er.iter() {
+    match ev.msg.response_type.as_ref().unwrap() {
+      ResponseType::TargetChange(response) =&gt; { }
+      ResponseType::Filter(response) =&gt; { }
+      ResponseType::DocumentChange(response) =&gt; {
+        println!(&quot;Document Changed: {:?}&quot;, response.document.clone().unwrap());
+      }
+      ResponseType::DocumentDelete(response) =&gt; {
+        println!(&quot;Document Deleted: {:?}&quot;, response.document.clone());
+      }
+      ResponseType::DocumentRemove(response) =&gt; {
+        println!(&quot;Document Removed: {:?}&quot;, response.document.clone());
+      }
+    }
+  }
+}
+</code></pre>
+<h2>Separation of concerns</h2>
+<p>Firebase is big. Like, very big. Even Google's own JS API is modularised now, and I think that will be the way to go with this project. Once this crate is closer to finished, I'll be aiming to split the auth and firestore components into their own crates, which leaves room for the rest of the Firebase ecosystem in more separate crates. This should also make the test writing experience markedly easier.</p>
+<h2>Example Project: Click Game</h2>
+<p>I think I'll aim for something extremely simple as an example project. Click to increase score. No bells, no whistles.</p>
+<h3>Login Screen</h3>
+<ul>
+<li>Attempts auto login, shows button to open browser if fails</li>
+</ul>
+<h3>Menu screen</h3>
+<ul>
+<li>
+<p>Title</p>
+</li>
+<li>
+<p>Play button</p>
+</li>
+<li>
+<p>Edit account button (nickname)</p>
+</li>
+<li>
+<p>Delete progress button</p>
+</li>
+<li>
+<p>Delete account button</p>
+</li>
+</ul>
+<h3>Play Screen</h3>
+<ul>
+<li>
+<p>Score</p>
+</li>
+<li>
+<p>Add to score button</p>
+</li>
+<li>
+<p>Submit score button</p>
+</li>
+</ul>
+<h3>Leaderboard Screen</h3>
+<ul>
+<li>Live updating list of scores + names</li>
+</ul>
+<p>That should cover most code paths.</p>
+<h2>Using the plugin!</h2>
+<p>Through making click-game I'm finding using the plugin to be fairly straightforward. I'd prefer to not need to pass it 4 resources every call, but other than that it's simple enough to integrate. That may just be from my point of view having written it though.</p>
+<hr>
+<h3>Using the plugin...</h3>
+<p>It can't be all good I guess. Extracting data from Documents is a real pain point at the moment, I'll have a good go at abstracting the majority of this away sometime soon.</p>
+<pre><code class="language-rs">let name: String = match name_res {
+  Ok(res) =&gt; {
+    let doc = res.into_inner();
+    if let Some(val) = doc.fields.get(&quot;name&quot;) {
+      if let Some(vt) = val.clone().value_type {
+        match vt {
+          ValueType::StringValue(s) =&gt; s,
+          _ =&gt; &quot;Player&quot;.into(),
+        }
+      } else {
+        &quot;Player&quot;.into()
+      }
+    } else {
+      &quot;Player&quot;.into()
+    }
+  }
+  Err(_) =&gt; {
+    &quot;Player&quot;.into()
+  }
+};
+</code></pre>
+<p>I've also found that abstracting away the function calls is pointless, calling the <code>googleapis</code> systems directly is easier and more configurable,  and my wrapper barely saved any keystrokes. That's my inexperience with structured languages showing.</p>
+<p>I'm running in to an issue where updating a document removes all fields not included in the update. <s>This seems to be backward behaviour according to the documentation, I'll do some deeper research and try to find out where I'm going wrong.</s></p>
+<p><img src="/blog/img/bevy-firebase/silly_docs.png" alt="silly docs"></p>
+<p>Apparently I can't read this evening, and understood the docs backwards. <code>update_mask</code> MUST contain the fields to update, else it will put only what is in it's input into firestore, deleting all other fields. Where it said if I don't reference them in the mask, I assumed a blank mask matched lazily. It matches greedily, meaning it matched the fields I had set previously on the document, and wiped them out due to being empty on the input doc.</p>
+<p>Turns out the abstraction could be useful for auto-inserting an update mask from the keys of the data passed in. I'll keep playing with it and see where I land on this.</p>
+<p>Following that fiasco, I have the beginnings of a working example app.</p>
+<blockquote>
+<video controls>
+<source src="/blog/img/bevy-firebase/login.webm" type="video/webm">
+</video>
+We browser login now
+</blockquote>
+<blockquote>
+<video controls>
+<source src="/blog/img/bevy-firebase/firestore.webm" type="video/webm">
+</video>
+And sending data to firestore is working too!
+</blockquote>
+<hr>
+<h2>Event driven systems</h2>
+<p>I've decided that the best way to abstract the complicated code away is to use an event based system for each operation type. The part I'm stuck on right now is getting the response. For usability, I'd prefer it be another customisable event, but I'm having endless problems trying to feed generics into the events system.</p>
+<p>I've looked into callbacks, but I can't seem to squeak them past the borrow checker. Usually an indication that I'm doing something un-rusty somewhere.</p>
+<hr>
+<p>After a full on war with our good friend the borrow checker, I've got a solution. It's not pretty yet, but it works. Pretty can come later.</p>
+<p>To receive event based callbacks, the event listener needs to be running with custom Request and Response generics. Then everything works. Super messy implementing it in code, but hopefully I can shrink that all down. For general use, a default response event is sent, meaning this code works fine:</p>
+<pre><code class="language-rs">fn test(
+  user_info: Res&lt;TokenData&gt;,
+
+  mut document_creator: EventWriter&lt;CreateDocumentEvent&gt;,
+) {
+  let uid = user_info.local_id.clone();
+  let mut data = HashMap::new();
+
+  data.insert(
+      &quot;test_field&quot;.to_string(),
+      Value {
+          value_type: Some(ValueType::IntegerValue(69)),
+      },
+  );
+
+  document_creator.send(CreateDocumentEvent {
+      document_id: uid.clone(),
+      collection_id: &quot;lobbies&quot;.into(),
+      document_data: data.clone(),
+  });
+}
+
+fn response_handler(mut er: EventReader&lt;CreateDocumentResponseEvent&gt;) {
+  for e in er.iter() {
+    match e.result.clone() {
+      Ok(result) =&gt; {
+        println!(&quot;Document created: {:?}&quot;, result)
+      }
+      Err(status) =&gt; {
+        println!(&quot;ERROR: Document create failed: {}&quot;, status)
+      }
+    }
+  }
+}
+</code></pre>
+<p>but for custom callbacks...</p>
+<pre><code class="language-rs">#[derive(Clone)]
+struct CustomCreateDocumentResponseEvent {
+  result: DocumentResponse,
+}
+
+impl DocResEventBuilder for CustomCreateDocumentResponseEvent {
+  fn new(result: DocumentResponse) -&gt; Self {
+    CustomCreateDocumentResponseEvent { result }
+  }
+}
+
+#[derive(Clone)]
+struct CustomCreateDocumentEvent {
+  pub document_id: String,
+  pub collection_id: String,
+  pub document_data: HashMap&lt;String, Value&gt;,
+}
+
+impl CreateDocumentEventBuilder for CustomCreateDocumentEvent {
+  fn new(options: CustomCreateDocumentEvent) -&gt; Self {
+    options
+  }
+  fn collection_id(&amp;self) -&gt; String {
+    self.collection_id.clone()
+  }
+  fn document_data(&amp;self) -&gt; HashMap&lt;String, Value&gt; {
+    self.document_data.clone()
+  }
+  fn document_id(&amp;self) -&gt; String {
+    self.document_id.clone()
+  }
+}
+
+fn test(
+  user_info: Res&lt;TokenData&gt;,
+
+  mut document_creator: EventWriter&lt;CreateDocumentEvent&gt;,
+) {
+  let uid = user_info.local_id.clone();
+  let mut data = HashMap::new();
+
+  data.insert(
+      &quot;test_field&quot;.to_string(),
+      Value {
+          value_type: Some(ValueType::IntegerValue(69)),
+      },
+  );
+
+  document_creator.send(CustomCreateDocumentEvent {
+      document_id: uid.clone(),
+      collection_id: &quot;lobbies&quot;.into(),
+      document_data: data.clone(),
+  });
+}
+
+fn custom_response_handler(mut er: EventReader&lt;CustomCreateDocumentResponseEvent&gt;) {
+  for e in er.iter() {
+    match e.result.clone() {
+      Ok(result) =&gt; {
+        println!(&quot;Custom Event: Document created: {:?}&quot;, result)
+      }
+      Err(status) =&gt; {
+        println!(&quot;ERROR: Custom Event: Document create failed: {}&quot;, status)
+      }
+    }
+  }
+}
+
+</code></pre>
+<blockquote>
+<p>ew. Hopefully I can make this better in future with macros or something.</p>
+</blockquote>
+<p>So now I &quot;just&quot; need to implement this pattern for the other three document operations and I should be much closer to open sourcing the repo.</p>
+<p>Unfortunately I haven't had as much time as I'd like this week, so progress has been slow. I still need to look in to CI/CD, and write a README up, but I need to have at least the basic features up and running first!</p>
+<p>I want to look into syntax highlighting for all the code in these blogs and get a bit more styling done, but I think that's another issue for another time.</p>
+<p>Cheers for reading, ttfn.</p>
+
+</div>
+
+
+<nav>
+    <ol class='post-paginate'>
+        <li>
+            Previous:
+            
+                <a href="/blog/bevy-firebase-1/">Adding firestore</a>
+            
+        </li>
+        <li>
+            Next:
+            
+                <a href="/blog/bevy-firebase-3/">emulating firebase</a>
+            
+        </li>
+    </ol>
+</nav>
+        </div>
+    </body>
+</html>
