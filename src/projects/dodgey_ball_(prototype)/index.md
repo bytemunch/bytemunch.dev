@@ -14,4 +14,4 @@ My intention was to make a fun fast-paced multiplayer game, akin to [Sports Head
 
 Designed for controllers.
 
-It got as far as it did, then life happened. I hope to revitalise the idea with [dodgeball](/blog/tags/temp-new-dodgeball-game-name).
+It got as far as it did, then life happened. I hope to revitalise the idea with [dodgeball](/blog/tags/dodgeball).

@@ -1,9 +1,9 @@
 ---
-title: untitled dodgeball game
-project: untitled dodgeball game
+title: dodgeball
+project: dodgeball
 date: 2026-01-01
 description: the resurrected multiplayer dodgeball arcade game
-blog: temp-new-dodgeball-game-name
+blog: dodgeball
 ---
 
 ## what's this?

@@ -16,6 +16,6 @@ Writing devlogs and blog posts with my old site had a fair amount of friction, t
 
 ## What's next?
 
-Now I've got a half-decent site up, work on [as yet untitled dodgeball game](/projects/untitled_dodgeball_game/) can continue in earnest. I hope to post a devlog once a week, but there'll be more or less depending on how busy my life is at the time.
+Now I've got a half-decent site up, work on [as yet dodgeball](/projects/dodgeball/) can continue in earnest. I hope to post a devlog once a week, but there'll be more or less depending on how busy my life is at the time.
 
 The site still needs some accessibility work doing, and I could tweak my CSS forever... But I need to get better at reaching and recognising a finished state. So it'll do for now.

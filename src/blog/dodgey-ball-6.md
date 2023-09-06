@@ -14,4 +14,4 @@ I've moved all the progress made so far into a [prototype repo](https://github.c
 
 I tried to keep working on the project with the browser as the target platform, keeping the app in TypeScript, but I ran out of steam researching all the tech I'd need to use to make that happen. The project died, until recently where it is reborn as a Bevy game, with proper 3D workflows.
 
-Here's to [the future](/blog/tags/temp-new-dodgeball-game-name)!
+Here's to [the future](/blog/tags/dodgeball)!

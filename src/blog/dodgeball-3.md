@@ -1,8 +1,8 @@
 ---
 title: gRPC authenticated
-tags: [temp-new-dodgeball-game-name, dev, game, rust, firebase, auth, oauth2, firestore, gRPC]
+tags: [dodgeball, dev, game, rust, firebase, auth, oauth2, firestore, gRPC]
 date: 2023-06-05
-project: untitled dodgeball game
+project: dodgeball
 description: implementing firestore gRPC services in rust
 ---
 

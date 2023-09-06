@@ -1,8 +1,8 @@
 ---
 title: dodgeball login
-tags: [temp-new-dodgeball-game-name, dev, game, rust, firebase, auth, oauth2, firestore]
+tags: [dodgeball, dev, game, rust, firebase, auth, oauth2, firestore]
 date: 2023-05-10
-project: untitled dodgeball game
+project: dodgeball
 description: auth is hard
 ---
 

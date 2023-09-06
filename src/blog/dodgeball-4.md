@@ -1,8 +1,8 @@
 ---
 title: Firestore rules
-tags: [temp-new-dodgeball-game-name, dev, game, firebase,  firestore, rules, data]
+tags: [dodgeball, dev, game, firebase,  firestore, rules, data]
 date: 2023-06-06
-project: untitled dodgeball game
+project: dodgeball
 description: designing data structure and deploying rules for the dodgeball game's backend
 ---
 

@@ -1,8 +1,8 @@
 ---
 title: dodgeball returns
-tags: [temp-new-dodgeball-game-name, dev, game, rust, firebase, auth, oauth2]
+tags: [dodgeball, dev, game, rust, firebase, auth, oauth2]
 date: 2023-05-09
-project: untitled dodgeball game
+project: dodgeball
 description: it's back. hopefully better.
 ---
 
