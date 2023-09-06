@@ -1,7 +1,7 @@
 ---
 title: releasing bevy-firebase! 
 tags: [bevy-firebase, dev, game, rust, firebase, firestore, bevy, bevy-firebase-auth, bevy-firebase-firestore]
-date: 2023-08-15
+date: 2023-09-06
 project: bevy-firebase
 description: releasing a bevy plugin on crates.io
 ---
