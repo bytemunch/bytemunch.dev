@@ -1,8 +1,9 @@
 <html>
   <head>
     <meta content="text/html;charset=utf-8" http-equiv="Content-Type"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
   </head>
-  <body style="margin: 0; width: 100%; height: 100%;">
+  <body style="margin: 0; width: 100vw; height: 100vh;">
     <script>
   document.body.addEventListener("contextmenu", (e) => {
             e.preventDefault();
@@ -46,6 +47,7 @@
             function resumeAllContexts(_event) {
                 let count = 0;
 
+
                 audioContextList.forEach((context) => {
                     if (context.state !== "running") {
                         context.resume();
@@ -71,7 +73,7 @@
         })();
     </script>
     <script type="module">
-      import init from './pumpkin-game.js';
+      import init from './bin/pumpkin-game.js';
 
       async function run() {
         await init();
@@ -79,5 +81,6 @@
 
       run();
     </script>
+    <div id="audio-hack" style="font-family: monospace; width: 100%; height: 100%; background: #00000088; position: absolute; display: flex; justify-content: center; align-items: center; color: #FFFFFF88;" onclick="document.querySelector('#audio-hack').remove();"><h1>tap to play</h1></div>
   </body>
 </html>
