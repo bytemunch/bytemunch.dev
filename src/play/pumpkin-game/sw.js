@@ -1,9 +1,12 @@
+const CACHE_VERSION = "0.1.0";
+
 const addResourcesToCache = async (resources) => {
-  const cache = await caches.open("v1");
+  const cache = await caches.open(CACHE_VERSION);
   await cache.addAll(resources);
 };
 
 self.addEventListener("install", (event) => {
+  // TODO: clear old caches
   event.waitUntil(
     addResourcesToCache([
       "./",
@@ -78,7 +81,7 @@ self.addEventListener("install", (event) => {
 });
 
 const putInCache = async (request, response) => {
-  const cache = await caches.open("v1");
+  const cache = await caches.open(CACHE_VERSION);
   await cache.put(request, response);
 };
 
