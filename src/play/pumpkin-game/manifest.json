@@ -36,7 +36,7 @@
   "lang": "en-GB",
   "name": "Pumpkin Game",
   "short_name": "Pumpkin!",
-  "start_url": "/play/pumpkin-game/index.html",
+  "start_url": "/play/pumpkin-game/",
   "scope": "/play/pumpkin-game/",
   "description": "Merge the spooky balls, try to make a pumpkin!"
 }
