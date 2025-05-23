@@ -1,6 +1,6 @@
 ---
 title: Movie Snacks!
-tags: [movie_snacks_south_east, web, dev, eleventy, font, design]
+tags: [movie-snacks-south-east, web, dev, eleventy, font, design]
 date: 2023-06-19
 project: movie_snacks_south_east
 description: A new site for a new business.
@@ -24,8 +24,8 @@ I'm going to go through and laboriously cut lights out of the capital letters. L
 
 Now I've got holes in the font, I'll add it to the site. With a drop shadow repurposed as a glow and solid characters behind the holey ones we get an okay facsimile of lit up text.
 
->![glowy text](/blog/img/msse/glowy.png)
->certainly gaudy but that could be a vibe to pursue
+> ![glowy text](/blog/img/msse/glowy.png)
+> certainly gaudy but that could be a vibe to pursue
 
 ## The projector
 
@@ -35,11 +35,12 @@ I've put a background image from [transparent textures](https://www.transparentt
 
 Then I threw a nice asymmetrical grid up on it with a touch of transparency.
 
->![the grid](/blog/img/msse/grid.png)
->don't mind the giraffe, first image I found on [pixabay](https://pixabay.com/)
+> ![the grid](/blog/img/msse/grid.png)
+> don't mind the giraffe, first image I found on [pixabay](https://pixabay.com/)
 
 All content is put in the screen div with eleventy, and it feels good to scroll. The whole thing is of course responsive, mobile first, but unfortunately I'm not able to push the cinema aesthetic as clearly as on desktop. I think I might need to play with the font sizing on smaller displays too.
 
 ![responsive design](/blog/img/msse/responsive.png)
 
 Now I just need the content for the site. Once my brother gets back to me I'll continue on this project.
+

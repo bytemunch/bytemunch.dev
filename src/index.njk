@@ -4,11 +4,11 @@ layout: base
 ---
 
 <h2>about</h2>
-<p>i'm sam. developer. minimalist. parent; naptime coder.</p>
+<p>i'm sam. developer. designer. minimalist.</p>
 <a href="projects">
     <h2>projects</h2>
 </a>
-<p>recent projects</p>
+<p>stuff i've made or am making</p>
 <div id="projects">
     {% set arr = collections.projects | reverse %}
     {% for i in range(0,3) %}
@@ -22,8 +22,8 @@ layout: base
 <a href='blog'>
     <h2>blog</h2>
 </a>
-<p>recent posts</p>
-<div id="recent-posts">
+<p>latest posts</p>
+<div id="latest-posts">
     {% set arr = collections.post | reverse %}
     {% for i in range(0,2) %}
         {% if arr[i] %}
@@ -33,17 +33,6 @@ layout: base
     {% endfor %}
 </div>
 <a href="blog" class="see-more">see more...</a>
-<div id="funding" class="closed">
-    <h2 onclick=" let div = document.querySelector('#funding'); let h2 = document.querySelector('#funding h2'); if
-            (div.classList.contains('closed')) { div.classList.remove('closed'); h2.textContent = 'funding ▲'; } else {
-            div.classList.add('closed'); h2.textContent = 'funding ▼'; } ">
-        funding ▼</h2>
-    <p>i currently have a time budget of ~15hrs/week, and a cost budget of virtually nothing. my time budget will only be
-        getting smaller once my little one goes to nursery, as i'll be going back to work. if you would like to support my
-        projects, please
-        <a href="https://monzo.me/samueljamesedelsten">stick some cash in my pocket</a>. put your @ in the message so i know who
-                                    to thank :) cheers</p>
-</div>
 <h2>links</h2>
 <ul>
     <li>
